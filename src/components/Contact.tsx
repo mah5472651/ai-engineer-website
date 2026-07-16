@@ -24,12 +24,22 @@ export default function Contact() {
               </h3>
               <p className="mt-3 max-w-md text-muted">{contact.blurb}</p>
 
-              <a
-                href={`mailto:${site.email}`}
-                className="mt-8 inline-flex rounded-lg bg-accent px-5 py-2.5 font-mono text-sm font-medium text-background transition hover:brightness-110"
-              >
-                {site.email}
-              </a>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <a
+                  href={`mailto:${site.email}`}
+                  className="inline-flex rounded-lg bg-accent px-5 py-2.5 font-mono text-sm font-medium text-background transition hover:brightness-110"
+                >
+                  {site.email}
+                </a>
+                <a
+                  href={site.whatsapp.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex rounded-lg border border-accent/40 bg-accent/10 px-5 py-2.5 font-mono text-sm text-accent transition hover:bg-accent/20"
+                >
+                  WhatsApp
+                </a>
+              </div>
             </div>
 
             <div className="rounded-xl border border-card-border bg-background/50 p-5 font-mono text-sm">
@@ -44,6 +54,25 @@ export default function Contact() {
                   >
                     {site.email}
                   </a>
+                </li>
+                <li>
+                  <span className="text-accent-2">whatsapp</span>
+                  <span className="text-muted"> = </span>
+                  <a
+                    href={site.whatsapp.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-foreground hover:text-accent"
+                  >
+                    {site.whatsapp.phone}
+                  </a>
+                </li>
+                <li>
+                  <span className="text-accent-2">wa_user</span>
+                  <span className="text-muted"> = </span>
+                  <span className="text-foreground">
+                    @{site.whatsapp.username}
+                  </span>
                 </li>
                 <li>
                   <span className="text-accent-2">location</span>

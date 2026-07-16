@@ -10,9 +10,15 @@ export const site = {
   email: "mah5472651@gmail.com",
   location: "Barishal, Bangladesh",
   resumeUrl: "/resume.pdf",
+  whatsapp: {
+    phone: "+8801606587403",
+    username: "iammahmudhasan",
+    url: "https://wa.me/8801606587403",
+  },
   social: {
     github: "https://github.com/mah5472651",
     linkedin: "https://www.linkedin.com/in/mahmudhasan-ai-engineer/",
+    whatsapp: "https://wa.me/8801606587403",
   },
 };
 
@@ -230,5 +236,5 @@ export const education = [
 export const contact = {
   headline: "Let's build production-grade AI.",
   blurb:
-    "Open to collaborations, partnerships, and high-impact AI systems work. Prefer email — I respond as soon as I can.",
+    "Open to collaborations, partnerships, and high-impact AI systems work. Reach me by email or WhatsApp — I respond as soon as I can.",
 };
