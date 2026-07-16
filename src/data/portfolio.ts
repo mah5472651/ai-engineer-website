@@ -24,7 +24,7 @@ export const site = {
 
 export const about = {
   paragraphs: [
-    "High-growth AI Engineer and Operator bridging the gap between advanced research and production-grade AI systems. Serving concurrently as the COO of Craftly (building a frontier LLM) and Founder & CEO at Aeitron AI (engineering multi-agent automation workflows for high-ticket sectors like real estate).",
+    "High-growth AI Engineer bridging the gap between advanced research and production-grade AI systems. Serving concurrently as the COO of Craftly (building a frontier LLM) and Founder & CEO at Aeitron AI (engineering multi-agent automation workflows for high-ticket sectors like real estate).",
     "Specialized in multi-agent orchestration, advanced memory architectures, cybersecurity intelligence, and high-performance RAG pipelines.",
     "Proven track record of leading cross-functional engineering teams to build globally competitive AI technology from Bangladesh.",
   ],
@@ -203,7 +203,7 @@ export const projects: Project[] = [
 export const experience = [
   {
     company: "Craftly",
-    role: "COO · AI Engineer / Operator",
+    role: "COO · AI Engineer",
     period: "Present",
     location: "Bangladesh / Remote",
     bullets: [
