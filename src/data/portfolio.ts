@@ -102,101 +102,55 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    slug: "craftly-frontier-llm",
-    title: "Craftly — Frontier LLM platform",
-    year: "2024–Present",
+    slug: "aeitron-agentic-ai-architecture",
+    title: "Aeitron (Agentic AI Architecture)",
+    year: "Present",
     summary:
-      "As COO of Craftly, helping build and ship a frontier LLM — connecting research, product, and production systems.",
+      "Frontier AI architecture for autonomous agentic coding and core cybersecurity operations — deep reasoning, persistent memory, and tool execution.",
     description:
-      "Craftly is focused on building a frontier-grade language model stack. Work spans model strategy, production readiness, evaluation discipline, and cross-functional delivery so research advances become reliable product capabilities.",
+      "Aeitron is an advanced agentic AI architecture engineered for autonomous software creation and cyber defense intelligence. The system integrates deep reasoning, persistent memory structures, and tool execution so agents can operate with autonomy on complex engineering and security workflows.",
     impact: [
-      "COO-level ownership of engineering operations and delivery",
-      "Bridge between research direction and production AI systems",
-      "Cross-functional leadership across engineering and product",
+      "Frontier AI Architecture: Architecting advanced systems engineered specifically for autonomous agentic coding and core cybersecurity operations.",
+      "Autonomous Software Creation: Enabling self-directed software development by integrating deep reasoning, persistent memory structures, and tool execution.",
+      "Cyber Defense Intelligence: Developing highly specialized AI capabilities focused on threat detection, vulnerability analysis, and security intelligence.",
     ],
-    tags: ["LLM", "Research → Prod", "Leadership", "Evals"],
+    tags: [
+      "Agentic AI",
+      "Architecture",
+      "Autonomous coding",
+      "Cybersecurity",
+      "Memory",
+    ],
     links: {
       github: "https://github.com/mah5472651",
     },
     featured: true,
   },
   {
-    slug: "aeitron-multi-agent",
-    title: "Aeitron AI — Multi-agent automation",
-    year: "2024–Present",
+    slug: "aeitron-ai-finance-dashboard",
+    title: "Aeitron AI Finance Dashboard",
+    year: "Present",
     summary:
-      "Founder & CEO at Aeitron AI: multi-agent automation workflows for high-ticket sectors such as real estate.",
+      "Enterprise dashboard unifying finance, invoicing, CRM, and team tools — with an AI copilot and real-time analytics for real estate leads.",
     description:
-      "Aeitron AI designs and deploys multi-agent systems that automate complex business workflows. Agents coordinate tools, memory, and domain knowledge for high-ticket verticals, with a focus on reliability and real operational impact.",
+      "A comprehensive Unified Agency OS for finance tracking, automated invoicing, CRM, and team management. Includes an AI business assistant for real-time operational analytics and automated pipeline tracking for real estate leads, built with a premium React + Vite + TypeScript + Tailwind frontend.",
     impact: [
-      "Founder-led product and technical vision",
-      "Multi-agent workflows for real-estate and adjacent verticals",
-      "End-to-end automation from research concepts to deployed systems",
+      "Unified Agency OS: Engineered a comprehensive enterprise dashboard unifying finance tracking, automated invoicing, CRM, and team management tools.",
+      "AI Copilot & Real-Time Analytics: Integrated an AI business assistant providing real-time operational analytics and automated pipeline tracking for real estate leads.",
+      "Premium Frontend Stack: Developed a highly responsive, minimalist, and scalable UI from scratch using React, Vite, TypeScript, and Tailwind CSS.",
     ],
-    tags: ["Multi-agent", "Automation", "Real estate", "RAG"],
+    tags: [
+      "React",
+      "Vite",
+      "TypeScript",
+      "Tailwind",
+      "AI Copilot",
+      "Dashboard",
+    ],
     links: {
       github: "https://github.com/mah5472651",
-      writeup: "/blog/building-eval-gates-for-agents",
     },
     featured: true,
-  },
-  {
-    slug: "high-performance-rag",
-    title: "High-performance RAG pipelines",
-    year: "2024",
-    summary:
-      "Production-oriented retrieval pipelines combining hybrid search, re-ranking, and grounded generation for trustworthy answers.",
-    description:
-      "Design and implementation of high-performance RAG systems: chunking strategies, hybrid retrieval, re-ranking, grounding checks, and latency-aware serving — tailored for operator and product use cases.",
-    impact: [
-      "Grounded answers with stronger retrieval quality",
-      "Patterns reusable across Aeitron AI and platform work",
-      "Focus on faithfulness and production constraints",
-    ],
-    tags: ["RAG", "Vector search", "Evals", "Python"],
-    links: {
-      github: "https://github.com/mah5472651",
-      writeup: "/blog/hybrid-search-that-actually-ships",
-    },
-    featured: false,
-  },
-  {
-    slug: "agent-memory-architectures",
-    title: "Advanced agent memory architectures",
-    year: "2025",
-    summary:
-      "Memory designs for long-running agents — episodic, semantic, and tool-state memory that stays useful in production workflows.",
-    description:
-      "Exploration and implementation of memory layers for multi-agent systems: what to store, when to retrieve, how to avoid noise, and how memory interfaces with orchestration and RAG.",
-    impact: [
-      "More coherent multi-step agent sessions",
-      "Reusable memory patterns for automation products",
-      "Clearer separation of short-term vs long-term agent state",
-    ],
-    tags: ["Agents", "Memory", "Orchestration"],
-    links: {
-      github: "https://github.com/mah5472651",
-    },
-    featured: false,
-  },
-  {
-    slug: "cybersecurity-intelligence",
-    title: "Cybersecurity intelligence systems",
-    year: "2023–2024",
-    summary:
-      "AI-assisted cybersecurity intelligence workflows — signal processing, prioritization, and operator-facing insights.",
-    description:
-      "Application of AI systems to cybersecurity intelligence: structuring noisy signals, assisting analysts, and building pipelines that surface high-value security insights without drowning operators in false positives.",
-    impact: [
-      "Smarter triage and prioritization of security signals",
-      "AI workflows that support human operators",
-      "Intersection of security domain knowledge and ML systems",
-    ],
-    tags: ["Cybersecurity", "Intelligence", "ML systems"],
-    links: {
-      github: "https://github.com/mah5472651",
-    },
-    featured: false,
   },
 ];
 
