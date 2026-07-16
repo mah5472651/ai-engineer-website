@@ -28,8 +28,8 @@ export default function Hero() {
         <p className="animate-fade-up delay-2 mt-6 max-w-xl text-lg leading-relaxed text-muted sm:text-xl">
           {site.tagline}{" "}
           <span className="text-foreground/80">
-            Production ML, LLM systems, and the infrastructure that keeps them
-            honest.
+            Multi-agent systems, high-performance RAG, and frontier LLM
+            productization — from Bangladesh to global scale.
           </span>
         </p>
 
@@ -46,17 +46,17 @@ export default function Hero() {
           <div className="space-y-2 p-4 font-mono text-sm leading-relaxed">
             <p>
               <span className="text-accent-2">→</span>{" "}
-              <span className="text-muted">stack</span>
+              <span className="text-muted">roles</span>
             </p>
             <p className="pl-4 text-foreground/90">
-              pytorch · transformers · rag · agents · k8s · fastapi
+              coo @ craftly · founder &amp; ceo @ aeitron
             </p>
             <p>
               <span className="text-accent-2">→</span>{" "}
               <span className="text-muted">focus</span>
             </p>
             <p className="pl-4 text-foreground/90">
-              reliable inference · rigorous evals · shippable systems
+              multi-agent · memory · rag · cybersecurity intelligence
             </p>
             <p className="terminal-cursor text-accent">
               <span className="text-accent-2">→</span>{" "}

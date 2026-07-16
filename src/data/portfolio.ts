@@ -1,79 +1,78 @@
 /**
- * Portfolio content — edit this file to personalize the site.
+ * Portfolio content — Mahmud Hasan
  */
 
 export const site = {
-  name: "Alex Rivera",
+  name: "Mahmud Hasan",
   role: "AI Engineer",
-  tagline: "Building reliable ML systems that ship.",
-  email: "alex.rivera@example.com",
-  location: "San Francisco, CA",
+  tagline:
+    "Bridging advanced AI research and production-grade systems.",
+  email: "mah5472651@gmail.com",
+  location: "Barishal, Bangladesh",
   resumeUrl: "/resume.pdf",
   social: {
-    github: "https://github.com/alexrivera",
-    linkedin: "https://linkedin.com/in/alexrivera",
-    x: "https://x.com/alexrivera",
-    scholar: "https://scholar.google.com",
+    github: "https://github.com/mah5472651",
+    linkedin: "https://www.linkedin.com/in/mahmudhasan-ai-engineer/",
   },
 };
 
 export const about = {
   paragraphs: [
-    "I'm an AI engineer focused on production ML systems — from research prototypes to low-latency inference at scale. I care about model quality, evaluation rigor, and the glue that makes AI products actually work.",
-    "Recently I've shipped LLM agents, retrieval pipelines, and fine-tuned models for real users. I work across the stack: Python services, vector search, training loops, and frontend surfaces when the product needs it.",
-    "Outside of shipping models, I write about evaluation, prompt systems, and the messy middle between notebooks and production. Read the latest on the blog.",
+    "High-growth AI Engineer and Operator bridging the gap between advanced research and production-grade AI systems. Serving concurrently as the COO of Craftly (building a frontier LLM) and Founder & CEO at Aeitron (engineering multi-agent automation workflows for high-ticket sectors like real estate).",
+    "Specialized in multi-agent orchestration, advanced memory architectures, cybersecurity intelligence, and high-performance RAG pipelines.",
+    "Proven track record of leading cross-functional engineering teams to build globally competitive AI technology from Bangladesh.",
   ],
   highlights: [
-    { label: "Years building ML", value: "6+" },
-    { label: "Models in production", value: "20+" },
-    { label: "Latency budgets hit", value: "p99 < 200ms" },
+    { label: "Roles", value: "COO + CEO" },
+    { label: "Focus", value: "Agents · RAG" },
+    { label: "Based in", value: "Bangladesh" },
   ],
 };
 
 export const skills = {
   categories: [
     {
+      title: "AI Systems",
+      items: [
+        "Multi-agent orchestration",
+        "Advanced memory architectures",
+        "High-performance RAG",
+        "LLM productization",
+        "Cybersecurity intelligence",
+        "Workflow automation",
+      ],
+    },
+    {
       title: "ML & Deep Learning",
       items: [
         "PyTorch",
         "Transformers",
         "Fine-tuning / LoRA",
-        "RLHF / DPO",
-        "Computer Vision",
         "NLP",
+        "Evaluation & evals",
+        "Prompt systems",
       ],
     },
     {
-      title: "LLM Systems",
+      title: "LLM Stack",
       items: [
-        "RAG",
+        "RAG pipelines",
         "Agents & tools",
-        "Eval harnesses",
-        "Prompt engineering",
-        "vLLM / TGI",
-        "LangChain / LlamaIndex",
+        "Vector search",
+        "LangChain / LangGraph",
+        "vLLM / inference",
+        "Open & frontier models",
       ],
     },
     {
-      title: "MLOps & Infra",
-      items: [
-        "Kubernetes",
-        "Docker",
-        "MLflow / W&B",
-        "Feature stores",
-        "CI/CD for models",
-        "GPU optimization",
-      ],
-    },
-    {
-      title: "Software",
+      title: "Software & Leadership",
       items: [
         "Python",
         "TypeScript",
         "FastAPI",
         "PostgreSQL",
-        "Redis",
-        "AWS / GCP",
+        "Team leadership",
+        "Product & ops (COO/CEO)",
       ],
     },
   ],
@@ -97,103 +96,99 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    slug: "aether-agents",
-    title: "Aether — Multi-agent research system",
-    year: "2025",
+    slug: "craftly-frontier-llm",
+    title: "Craftly — Frontier LLM platform",
+    year: "2024–Present",
     summary:
-      "Orchestrates research agents with tool use, long-term memory, and automated evals. Cut literature review time by ~70% for internal teams.",
+      "As COO of Craftly, helping build and ship a frontier LLM — connecting research, product, and production systems.",
     description:
-      "Aether is a multi-agent system for technical research. Planner, search, reader, and critic agents collaborate over a shared memory store. Tools include web/search APIs, PDF parsing, and code execution sandboxes. An offline eval suite scores faithfulness, citation coverage, and task completion on a fixed benchmark of 120 research tasks.",
+      "Craftly is focused on building a frontier-grade language model stack. Work spans model strategy, production readiness, evaluation discipline, and cross-functional delivery so research advances become reliable product capabilities.",
     impact: [
-      "~70% faster literature reviews for ML and product research teams",
-      "Faithfulness score +18 pts after critic-agent + citation checks",
-      "Eval gate blocks regressions before each weekly model/prompt release",
+      "COO-level ownership of engineering operations and delivery",
+      "Bridge between research direction and production AI systems",
+      "Cross-functional leadership across engineering and product",
     ],
-    tags: ["Agents", "LangGraph", "OpenAI", "Evals", "Python"],
+    tags: ["LLM", "Research → Prod", "Leadership", "Evals"],
     links: {
-      demo: "https://github.com/alexrivera/aether",
-      github: "https://github.com/alexrivera/aether",
+      github: "https://github.com/mah5472651",
+    },
+    featured: true,
+  },
+  {
+    slug: "aeitron-multi-agent",
+    title: "Aeitron — Multi-agent automation",
+    year: "2024–Present",
+    summary:
+      "Founder & CEO at Aeitron: multi-agent automation workflows for high-ticket sectors such as real estate.",
+    description:
+      "Aeitron designs and deploys multi-agent systems that automate complex business workflows. Agents coordinate tools, memory, and domain knowledge for high-ticket verticals, with a focus on reliability and real operational impact.",
+    impact: [
+      "Founder-led product and technical vision",
+      "Multi-agent workflows for real-estate and adjacent verticals",
+      "End-to-end automation from research concepts to deployed systems",
+    ],
+    tags: ["Multi-agent", "Automation", "Real estate", "RAG"],
+    links: {
+      github: "https://github.com/mah5472651",
       writeup: "/blog/building-eval-gates-for-agents",
     },
     featured: true,
   },
   {
-    slug: "vectorforge-rag",
-    title: "VectorForge — Production RAG platform",
+    slug: "high-performance-rag",
+    title: "High-performance RAG pipelines",
     year: "2024",
     summary:
-      "End-to-end retrieval with hybrid search, cross-encoder re-ranking, and streaming answers. Serves 2M+ queries/month at p99 < 180ms.",
+      "Production-oriented retrieval pipelines combining hybrid search, re-ranking, and grounded generation for trustworthy answers.",
     description:
-      "VectorForge is a multi-tenant RAG platform: document ingest, chunking strategies, hybrid BM25 + dense retrieval (pgvector), cross-encoder re-rank, and streaming generation. Includes tenant isolation, per-collection ACLs, query caching, and latency/quality dashboards. Deployed on Kubernetes with autoscaling GPU inference via vLLM.",
+      "Design and implementation of high-performance RAG systems: chunking strategies, hybrid retrieval, re-ranking, grounding checks, and latency-aware serving — tailored for operator and product use cases.",
     impact: [
-      "2M+ queries/month in production",
-      "p99 end-to-end latency under 180ms for retrieval path",
-      "Answer faithfulness +22% vs. naive top-k dense-only baseline",
+      "Grounded answers with stronger retrieval quality",
+      "Patterns reusable across Aeitron and platform work",
+      "Focus on faithfulness and production constraints",
     ],
-    tags: ["RAG", "pgvector", "FastAPI", "vLLM", "Redis"],
+    tags: ["RAG", "Vector search", "Evals", "Python"],
     links: {
-      demo: "https://github.com/alexrivera/vectorforge",
-      github: "https://github.com/alexrivera/vectorforge",
+      github: "https://github.com/mah5472651",
       writeup: "/blog/hybrid-search-that-actually-ships",
     },
-    featured: true,
+    featured: false,
   },
   {
-    slug: "signalnet",
-    title: "SignalNet — Real-time anomaly detection",
-    year: "2023",
+    slug: "agent-memory-architectures",
+    title: "Advanced agent memory architectures",
+    year: "2025",
     summary:
-      "Streaming ML for infrastructure metrics. Online learning cut false positives 40% vs. static thresholds.",
+      "Memory designs for long-running agents — episodic, semantic, and tool-state memory that stays useful in production workflows.",
     description:
-      "SignalNet processes high-volume time-series from Kafka, scores anomalies with a mix of statistical baselines and neural forecasters, and pages on-call only when confidence and business impact pass thresholds. Includes feature store integration, model drift monitors, and shadow-mode rollouts.",
+      "Exploration and implementation of memory layers for multi-agent systems: what to store, when to retrieve, how to avoid noise, and how memory interfaces with orchestration and RAG.",
     impact: [
-      "40% fewer false-positive pages vs. static thresholds",
-      "Sub-second scoring on multi-tenant metric streams",
-      "Shadow deploys with automatic rollback on drift alerts",
+      "More coherent multi-step agent sessions",
+      "Reusable memory patterns for automation products",
+      "Clearer separation of short-term vs long-term agent state",
     ],
-    tags: ["PyTorch", "Kafka", "Time-series", "MLOps"],
+    tags: ["Agents", "Memory", "Orchestration"],
     links: {
-      github: "https://github.com/alexrivera/signalnet",
-      writeup: "/blog/online-learning-for-anomaly-detection",
+      github: "https://github.com/mah5472651",
     },
     featured: false,
   },
   {
-    slug: "tunekit",
-    title: "TuneKit — LoRA fine-tuning toolkit",
-    year: "2024",
+    slug: "cybersecurity-intelligence",
+    title: "Cybersecurity intelligence systems",
+    year: "2023–2024",
     summary:
-      "Opinionated CLI and configs for domain adaptation of open models. Adopted by five product teams for custom assistants.",
+      "AI-assisted cybersecurity intelligence workflows — signal processing, prioritization, and operator-facing insights.",
     description:
-      "TuneKit wraps PEFT/LoRA training, data recipes, eval harness hooks, and export-to-vLLM in one CLI. Teams define domain datasets and eval sets; TuneKit handles training jobs, artifact versioning, and a one-command smoke test against golden prompts before promotion.",
+      "Application of AI systems to cybersecurity intelligence: structuring noisy signals, assisting analysts, and building pipelines that surface high-value security insights without drowning operators in false positives.",
     impact: [
-      "Used by 5 product teams for domain assistants",
-      "Median 3 days from dataset ready → canary deploy",
-      "Shared eval suite prevents silent quality regressions",
+      "Smarter triage and prioritization of security signals",
+      "AI workflows that support human operators",
+      "Intersection of security domain knowledge and ML systems",
     ],
-    tags: ["LoRA", "Hugging Face", "PEFT", "CLI"],
+    tags: ["Cybersecurity", "Intelligence", "ML systems"],
     links: {
-      github: "https://github.com/alexrivera/tunekit",
-      writeup: "/blog/lora-recipes-that-transfer",
-    },
-    featured: false,
-  },
-  {
-    slug: "docmind",
-    title: "DocMind — Document intelligence pipeline",
-    year: "2022",
-    summary:
-      "Vision + NLP pipeline for invoices and contracts. Reduced manual document review by 60% in production.",
-    description:
-      "DocMind combines layout-aware OCR, entity extraction, and validation rules for semi-structured documents. Models were trained with weak supervision + active learning. Served behind a FastAPI gateway with human-in-the-loop review UI for low-confidence fields.",
-    impact: [
-      "60% reduction in manual document review volume",
-      "Field-level F1 > 0.94 on internal invoice benchmark",
-      "Active learning loop cut labeling cost ~35%",
-    ],
-    tags: ["Computer Vision", "NLP", "FastAPI", "Active Learning"],
-    links: {
-      github: "https://github.com/alexrivera/docmind",
+      github: "https://github.com/mah5472651",
     },
     featured: false,
   },
@@ -201,54 +196,39 @@ export const projects: Project[] = [
 
 export const experience = [
   {
-    company: "Nova Labs",
-    role: "Senior AI Engineer",
-    period: "2023 — Present",
-    location: "San Francisco, CA",
+    company: "Craftly",
+    role: "COO · AI Engineer / Operator",
+    period: "Present",
+    location: "Bangladesh / Remote",
     bullets: [
-      "Lead LLM platform: RAG, agents, and evals powering core product features for 50k+ users.",
-      "Designed multi-tenant retrieval with hybrid search; improved answer faithfulness by 22%.",
-      "Mentored 3 engineers; established model review and canary deployment practices.",
+      "Serve as COO while building a frontier LLM — aligning research, engineering, and product delivery.",
+      "Drive production-grade AI systems: evaluation, reliability, and the path from prototype to shippable capability.",
+      "Lead cross-functional teams to compete at a global level from Bangladesh.",
     ],
   },
   {
-    company: "Horizon AI",
-    role: "Machine Learning Engineer",
-    period: "2021 — 2023",
-    location: "Remote",
+    company: "Aeitron",
+    role: "Founder & CEO",
+    period: "Present",
+    location: "Barishal, Bangladesh / Remote",
     bullets: [
-      "Shipped vision + NLP models for document understanding; reduced manual review by 60%.",
-      "Built training pipelines on Kubernetes with experiment tracking and automated regression tests.",
-      "Partnered with product to define success metrics and offline/online evaluation loops.",
-    ],
-  },
-  {
-    company: "DataPulse",
-    role: "ML Engineer",
-    period: "2019 — 2021",
-    location: "New York, NY",
-    bullets: [
-      "Productionized ranking and recommendation models serving high-throughput APIs.",
-      "Owned feature pipelines and monitoring for drift and latency SLOs.",
+      "Founded Aeitron to engineer multi-agent automation workflows for high-ticket sectors including real estate.",
+      "Specialize in multi-agent orchestration, advanced memory architectures, and high-performance RAG pipelines.",
+      "Own product vision and technical direction for automation systems that operators can trust in production.",
     ],
   },
 ];
 
 export const education = [
   {
-    school: "Carnegie Mellon University",
-    degree: "M.S. Machine Learning",
-    period: "2017 — 2019",
-  },
-  {
-    school: "University of California, Berkeley",
-    degree: "B.S. Computer Science",
-    period: "2013 — 2017",
+    school: "See resume for full education details",
+    degree: "Download resume.pdf",
+    period: "",
   },
 ];
 
 export const contact = {
-  headline: "Let's build something intelligent.",
+  headline: "Let's build production-grade AI.",
   blurb:
-    "Open to full-time roles, consulting, and interesting AI systems problems. Prefer email — I respond within a few days.",
+    "Open to collaborations, partnerships, and high-impact AI systems work. Prefer email — I respond as soon as I can.",
 };
