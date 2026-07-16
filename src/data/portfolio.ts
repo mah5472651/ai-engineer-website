@@ -18,7 +18,7 @@ export const site = {
 
 export const about = {
   paragraphs: [
-    "High-growth AI Engineer and Operator bridging the gap between advanced research and production-grade AI systems. Serving concurrently as the COO of Craftly (building a frontier LLM) and Founder & CEO at Aeitron (engineering multi-agent automation workflows for high-ticket sectors like real estate).",
+    "High-growth AI Engineer and Operator bridging the gap between advanced research and production-grade AI systems. Serving concurrently as the COO of Craftly (building a frontier LLM) and Founder & CEO at Aeitron AI (engineering multi-agent automation workflows for high-ticket sectors like real estate).",
     "Specialized in multi-agent orchestration, advanced memory architectures, cybersecurity intelligence, and high-performance RAG pipelines.",
     "Proven track record of leading cross-functional engineering teams to build globally competitive AI technology from Bangladesh.",
   ],
@@ -116,12 +116,12 @@ export const projects: Project[] = [
   },
   {
     slug: "aeitron-multi-agent",
-    title: "Aeitron — Multi-agent automation",
+    title: "Aeitron AI — Multi-agent automation",
     year: "2024–Present",
     summary:
-      "Founder & CEO at Aeitron: multi-agent automation workflows for high-ticket sectors such as real estate.",
+      "Founder & CEO at Aeitron AI: multi-agent automation workflows for high-ticket sectors such as real estate.",
     description:
-      "Aeitron designs and deploys multi-agent systems that automate complex business workflows. Agents coordinate tools, memory, and domain knowledge for high-ticket verticals, with a focus on reliability and real operational impact.",
+      "Aeitron AI designs and deploys multi-agent systems that automate complex business workflows. Agents coordinate tools, memory, and domain knowledge for high-ticket verticals, with a focus on reliability and real operational impact.",
     impact: [
       "Founder-led product and technical vision",
       "Multi-agent workflows for real-estate and adjacent verticals",
@@ -144,7 +144,7 @@ export const projects: Project[] = [
       "Design and implementation of high-performance RAG systems: chunking strategies, hybrid retrieval, re-ranking, grounding checks, and latency-aware serving — tailored for operator and product use cases.",
     impact: [
       "Grounded answers with stronger retrieval quality",
-      "Patterns reusable across Aeitron and platform work",
+      "Patterns reusable across Aeitron AI and platform work",
       "Focus on faithfulness and production constraints",
     ],
     tags: ["RAG", "Vector search", "Evals", "Python"],
@@ -207,12 +207,12 @@ export const experience = [
     ],
   },
   {
-    company: "Aeitron",
+    company: "Aeitron AI",
     role: "Founder & CEO",
     period: "Present",
     location: "Barishal, Bangladesh / Remote",
     bullets: [
-      "Founded Aeitron to engineer multi-agent automation workflows for high-ticket sectors including real estate.",
+      "Founded Aeitron AI to engineer multi-agent automation workflows for high-ticket sectors including real estate.",
       "Specialize in multi-agent orchestration, advanced memory architectures, and high-performance RAG pipelines.",
       "Own product vision and technical direction for automation systems that operators can trust in production.",
     ],

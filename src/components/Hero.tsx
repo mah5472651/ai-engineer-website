@@ -49,7 +49,7 @@ export default function Hero() {
               <span className="text-muted">roles</span>
             </p>
             <p className="pl-4 text-foreground/90">
-              coo @ craftly · founder &amp; ceo @ aeitron
+              coo @ craftly · founder &amp; ceo @ aeitron ai
             </p>
             <p>
               <span className="text-accent-2">→</span>{" "}
