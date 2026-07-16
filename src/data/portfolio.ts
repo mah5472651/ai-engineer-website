@@ -8,6 +8,10 @@ export const site = {
   tagline:
     "Bridging advanced AI research and production-grade systems.",
   email: "mah5472651@gmail.com",
+  /** Opens the device/browser mail app with this address filled in */
+  get emailHref() {
+    return `mailto:mah5472651@gmail.com?subject=${encodeURIComponent("Hello Mahmud Hasan")}`;
+  },
   location: "Barishal, Bangladesh",
   resumeUrl: "/resume.pdf",
   whatsapp: {

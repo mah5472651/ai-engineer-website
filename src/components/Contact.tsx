@@ -2,6 +2,8 @@ import { contact, site } from "@/data/portfolio";
 import SectionHeading from "./SectionHeading";
 
 export default function Contact() {
+  const mailHref = site.emailHref;
+
   return (
     <section id="contact" className="scroll-mt-20 px-5 py-24 sm:px-8">
       <div className="mx-auto max-w-6xl">
@@ -26,8 +28,9 @@ export default function Contact() {
 
               <div className="mt-8 flex flex-wrap gap-3">
                 <a
-                  href={`mailto:${site.email}`}
-                  className="inline-flex rounded-lg bg-accent px-5 py-2.5 font-mono text-sm font-medium text-background transition hover:brightness-110"
+                  href={mailHref}
+                  className="inline-flex cursor-pointer rounded-lg bg-accent px-5 py-2.5 font-mono text-sm font-medium text-background transition hover:brightness-110"
+                  aria-label={`Send email to ${site.email}`}
                 >
                   {site.email}
                 </a>
@@ -35,11 +38,14 @@ export default function Contact() {
                   href={site.whatsapp.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex rounded-lg border border-accent/40 bg-accent/10 px-5 py-2.5 font-mono text-sm text-accent transition hover:bg-accent/20"
+                  className="inline-flex cursor-pointer rounded-lg border border-accent/40 bg-accent/10 px-5 py-2.5 font-mono text-sm text-accent transition hover:bg-accent/20"
                 >
                   WhatsApp
                 </a>
               </div>
+              <p className="mt-3 font-mono text-[11px] text-muted">
+                Click email → opens your mail app (Gmail / Outlook / Mail)
+              </p>
             </div>
 
             <div className="rounded-xl border border-card-border bg-background/50 p-5 font-mono text-sm">
@@ -49,8 +55,9 @@ export default function Contact() {
                   <span className="text-accent-2">email</span>
                   <span className="text-muted"> = </span>
                   <a
-                    href={`mailto:${site.email}`}
-                    className="text-foreground hover:text-accent"
+                    href={mailHref}
+                    className="cursor-pointer text-accent underline underline-offset-4 hover:brightness-110"
+                    aria-label={`Send email to ${site.email}`}
                   >
                     {site.email}
                   </a>
@@ -62,7 +69,7 @@ export default function Contact() {
                     href={site.whatsapp.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-foreground hover:text-accent"
+                    className="cursor-pointer text-foreground hover:text-accent"
                   >
                     {site.whatsapp.phone}
                   </a>
@@ -87,7 +94,7 @@ export default function Contact() {
                       href={url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-foreground hover:text-accent"
+                      className="cursor-pointer text-foreground hover:text-accent"
                     >
                       open ↗
                     </a>
