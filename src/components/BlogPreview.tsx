@@ -6,7 +6,7 @@ export default function BlogPreview() {
   const latest = getAllPosts().slice(0, 3);
 
   return (
-    <section id="blog" className="scroll-mt-20 px-5 py-24 sm:px-8">
+    <section id="blog" className="scroll-mt-20 px-4 py-16 sm:px-8 sm:py-24">
       <div className="mx-auto max-w-6xl">
         <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <SectionHeading

@@ -9,11 +9,11 @@ export default function SectionHeading({ id, command, title, subtitle }: Props) 
   return (
     <div id={id} className="mb-10">
       <p className="mb-2 font-mono text-sm text-accent">$ {command}</p>
-      <h2 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+      <h2 className="text-xl font-semibold tracking-tight text-foreground sm:text-3xl">
         {title}
       </h2>
       {subtitle && (
-        <p className="mt-2 max-w-2xl text-muted">{subtitle}</p>
+        <p className="mt-2 max-w-2xl text-sm text-muted sm:text-base">{subtitle}</p>
       )}
     </div>
   );

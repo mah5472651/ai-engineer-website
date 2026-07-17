@@ -46,6 +46,19 @@ Replace GitHub/demo URLs and personal details with your own.
 
 Deploy on [Vercel](https://vercel.com) (import the repo, framework: Next.js).
 
+### SEO / production URL
+
+Set the public origin so sitemap, robots, and Open Graph use the correct domain:
+
+```bash
+# .env.local or Vercel env
+NEXT_PUBLIC_SITE_URL=https://your-domain.com
+```
+
+Without it, the app falls back to Vercel’s production URL when available.
+
+SEO includes: `sitemap.xml`, `robots.txt`, canonical URLs, Open Graph / Twitter cards, JSON-LD (Person + WebSite + projects/posts), and a web app manifest.
+
 ## Stack
 
 - Next.js (App Router)
@@ -53,3 +66,4 @@ Deploy on [Vercel](https://vercel.com) (import the repo, framework: Next.js).
 - Tailwind CSS v4
 - react-markdown
 - pdfkit (resume generation)
+- Vitest (content integrity)

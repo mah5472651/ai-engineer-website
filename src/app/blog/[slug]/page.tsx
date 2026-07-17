@@ -10,6 +10,7 @@ import {
   getPostBySlug,
 } from "@/data/blog";
 import { site } from "@/data/portfolio";
+import { blogPostingJsonLd, buildPageMetadata } from "@/lib/seo";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -23,10 +24,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const post = getPostBySlug(slug);
   if (!post) return { title: "Post not found" };
-  return {
-    title: `${post.title} · ${site.name}`,
+  return buildPageMetadata({
+    title: post.title,
     description: post.description,
-  };
+    path: `/blog/${post.slug}`,
+    type: "article",
+    keywords: [...post.tags, "AI blog", site.name],
+  });
 }
 
 export default async function BlogPostPage({ params }: Props) {
@@ -34,26 +38,39 @@ export default async function BlogPostPage({ params }: Props) {
   const post = getPostBySlug(slug);
   if (!post) notFound();
 
+  const jsonLd = blogPostingJsonLd(post);
+
   return (
     <>
       <Navbar />
-      <main className="flex-1 px-5 pb-24 pt-28 sm:px-8">
+      <main
+        id="main-content"
+        className="flex-1 px-4 pb-20 pt-24 sm:px-8 sm:pb-24 sm:pt-28"
+      >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <article className="mx-auto max-w-3xl">
           <Link
             href="/blog"
-            className="font-mono text-xs text-muted transition hover:text-accent"
+            className="inline-flex min-h-11 items-center font-mono text-xs text-muted transition hover:text-accent"
           >
             ← back to blog
           </Link>
 
-          <header className="mt-6 border-b border-card-border pb-8">
+          <header className="mt-4 border-b border-card-border pb-6 sm:mt-6 sm:pb-8">
             <p className="font-mono text-xs text-muted">
-              {formatPostDate(post.date)} · {post.readingMinutes} min read
+              <time dateTime={post.date}>{formatPostDate(post.date)}</time>
+              {" · "}
+              {post.readingMinutes} min read
             </p>
-            <h1 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+            <h1 className="mt-3 text-2xl font-semibold tracking-tight text-foreground break-words sm:text-4xl">
               {post.title}
             </h1>
-            <p className="mt-3 text-lg text-muted">{post.description}</p>
+            <p className="mt-3 text-base text-muted sm:text-lg">
+              {post.description}
+            </p>
             <div className="mt-4 flex flex-wrap gap-1.5">
               {post.tags.map((tag) => (
                 <span
@@ -66,12 +83,14 @@ export default async function BlogPostPage({ params }: Props) {
             </div>
           </header>
 
-          <div className="mt-10">
+          <div className="mt-8 sm:mt-10">
             <Markdown content={post.body.trim()} />
           </div>
 
-          <footer className="mt-16 rounded-xl border border-card-border bg-card/50 p-6">
-            <p className="font-mono text-xs text-accent">$ echo &quot;thanks for reading&quot;</p>
+          <footer className="mt-12 rounded-xl border border-card-border bg-card/50 p-5 sm:mt-16 sm:p-6">
+            <p className="font-mono text-xs text-accent">
+              $ echo &quot;thanks for reading&quot;
+            </p>
             <p className="mt-2 text-sm text-muted">
               Want to talk systems, evals, or roles?{" "}
               <Link href="/#contact" className="text-accent hover:underline">

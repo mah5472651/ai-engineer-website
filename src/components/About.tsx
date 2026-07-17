@@ -3,7 +3,7 @@ import SectionHeading from "./SectionHeading";
 
 export default function About() {
   return (
-    <section id="about" className="scroll-mt-20 px-5 py-24 sm:px-8">
+    <section id="about" className="scroll-mt-20 px-4 py-16 sm:px-8 sm:py-24">
       <div className="mx-auto max-w-6xl">
         <SectionHeading
           command="cat about.md"

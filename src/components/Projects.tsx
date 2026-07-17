@@ -4,7 +4,7 @@ import SectionHeading from "./SectionHeading";
 
 export default function Projects() {
   return (
-    <section id="projects" className="scroll-mt-20 px-5 py-24 sm:px-8">
+    <section id="projects" className="scroll-mt-20 px-4 py-16 sm:px-8 sm:py-24">
       <div className="mx-auto max-w-6xl">
         <SectionHeading
           command="find ./projects -type f"
@@ -17,7 +17,7 @@ export default function Projects() {
             <Link
               key={project.slug}
               href={`/projects/${project.slug}`}
-              className="group flex flex-col rounded-xl border border-card-border bg-card/60 p-4 transition hover:border-accent/40 hover:bg-card hover:shadow-[0_0_28px_-12px_var(--accent-dim)] sm:p-5"
+              className="group flex min-h-[11rem] flex-col rounded-xl border border-card-border bg-card/60 p-4 transition hover:border-accent/40 hover:bg-card hover:shadow-[0_0_28px_-12px_var(--accent-dim)] sm:p-5"
             >
               <div className="mb-2 flex items-start justify-between gap-2">
                 <p className="font-mono text-[10px] text-muted">{project.year}</p>
@@ -28,7 +28,7 @@ export default function Projects() {
                 )}
               </div>
 
-              <h3 className="text-base font-semibold leading-snug tracking-tight text-foreground transition group-hover:text-accent sm:text-[17px]">
+              <h3 className="text-base font-semibold leading-snug tracking-tight text-foreground break-words transition group-hover:text-accent sm:text-[17px]">
                 {project.title}
               </h3>
 

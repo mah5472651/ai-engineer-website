@@ -3,7 +3,7 @@ import SectionHeading from "./SectionHeading";
 
 export default function Skills() {
   return (
-    <section id="skills" className="scroll-mt-20 px-5 py-24 sm:px-8">
+    <section id="skills" className="scroll-mt-20 px-4 py-16 sm:px-8 sm:py-24">
       <div className="mx-auto max-w-6xl">
         <SectionHeading
           command="ls skills/"

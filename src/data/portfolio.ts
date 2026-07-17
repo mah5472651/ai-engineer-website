@@ -7,6 +7,11 @@ export const site = {
   role: "AI Engineer",
   tagline:
     "Bridging advanced AI research and production-grade systems.",
+  /** Extra hero line (kept in data so UI copy does not drift) */
+  heroExtra:
+    "Multi-agent systems, high-performance RAG, and frontier LLM productization — from Bangladesh to global scale.",
+  heroRoles: "coo @ craftly · founder & ceo @ aeitron ai",
+  heroFocus: "multi-agent · memory · rag · cybersecurity intelligence",
   email: "mah5472651@gmail.com",
   /** Opens the device/browser mail app with this address filled in */
   get emailHref() {

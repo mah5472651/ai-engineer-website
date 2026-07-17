@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { getProjectBySlug, projects, site } from "@/data/portfolio";
+import { buildPageMetadata, projectJsonLd } from "@/lib/seo";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -17,10 +18,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const project = getProjectBySlug(slug);
   if (!project) return { title: "Project not found" };
-  return {
-    title: `${project.title} · ${site.name}`,
+  return buildPageMetadata({
+    title: project.title,
     description: project.summary,
-  };
+    path: `/projects/${project.slug}`,
+    keywords: [...project.tags, "project", site.name, "AI Engineer"],
+  });
 }
 
 export default async function ProjectPage({ params }: Props) {
@@ -29,30 +32,35 @@ export default async function ProjectPage({ params }: Props) {
   if (!project) notFound();
 
   const otherProjects = projects.filter((p) => p.slug !== project.slug);
+  const jsonLd = projectJsonLd(project);
 
   return (
     <>
       <Navbar />
-      <main className="flex-1">
+      <main id="main-content" className="flex-1">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         {/* Hero */}
-        <header className="border-b border-card-border px-5 pb-12 pt-28 sm:px-8 sm:pb-16">
+        <header className="border-b border-card-border px-4 pb-10 pt-24 sm:px-8 sm:pb-16 sm:pt-28">
           <div className="mx-auto max-w-4xl">
             <Link
               href="/#projects"
-              className="font-mono text-xs text-muted transition hover:text-accent"
+              className="inline-flex min-h-11 items-center font-mono text-xs text-muted transition hover:text-accent"
             >
               ← all projects
             </Link>
 
-            <p className="mt-6 font-mono text-xs text-accent">
+            <p className="mt-4 font-mono text-xs text-accent break-all sm:mt-6">
               $ cat projects/{project.slug}.md
             </p>
             <p className="mt-2 font-mono text-xs text-muted">{project.year}</p>
 
-            <h1 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
+            <h1 className="mt-3 text-2xl font-semibold tracking-tight text-foreground break-words sm:text-4xl lg:text-5xl">
               {project.title}
             </h1>
-            <p className="mt-5 max-w-3xl text-lg leading-relaxed text-muted sm:text-xl">
+            <p className="mt-4 max-w-3xl text-base leading-relaxed text-muted sm:mt-5 sm:text-xl">
               {project.description}
             </p>
 
@@ -73,7 +81,7 @@ export default async function ProjectPage({ params }: Props) {
                   href={project.links.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="rounded-lg border border-card-border bg-card px-4 py-2.5 text-foreground transition hover:border-accent/40 hover:text-accent"
+                  className="inline-flex min-h-11 items-center rounded-lg border border-card-border bg-card px-4 py-2.5 text-foreground transition hover:border-accent/40 hover:text-accent"
                 >
                   github ↗
                 </a>
@@ -84,7 +92,7 @@ export default async function ProjectPage({ params }: Props) {
                     href={project.links.demo}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="rounded-lg border border-card-border bg-card px-4 py-2.5 text-foreground transition hover:border-accent/40 hover:text-accent"
+                    className="inline-flex min-h-11 items-center rounded-lg border border-card-border bg-card px-4 py-2.5 text-foreground transition hover:border-accent/40 hover:text-accent"
                   >
                     demo ↗
                   </a>
@@ -92,14 +100,14 @@ export default async function ProjectPage({ params }: Props) {
               {project.links.writeup && (
                 <Link
                   href={project.links.writeup}
-                  className="rounded-lg bg-accent px-4 py-2.5 text-background transition hover:brightness-110"
+                  className="inline-flex min-h-11 items-center rounded-lg bg-accent px-4 py-2.5 text-background transition hover:brightness-110"
                 >
                   related writeup →
                 </Link>
               )}
               <Link
                 href="/#contact"
-                className="rounded-lg border border-accent/40 bg-accent/10 px-4 py-2.5 text-accent transition hover:bg-accent/20"
+                className="inline-flex min-h-11 items-center rounded-lg border border-accent/40 bg-accent/10 px-4 py-2.5 text-accent transition hover:bg-accent/20"
               >
                 discuss this project
               </Link>
@@ -107,9 +115,8 @@ export default async function ProjectPage({ params }: Props) {
           </div>
         </header>
 
-        <article className="px-5 py-14 sm:px-8 sm:py-20">
-          <div className="mx-auto max-w-4xl space-y-14">
-            {/* Highlights */}
+        <article className="px-4 py-10 sm:px-8 sm:py-20">
+          <div className="mx-auto max-w-4xl space-y-10 sm:space-y-14">
             <section>
               <h2 className="mb-5 font-mono text-sm text-accent">
                 $ cat highlights.log
@@ -118,36 +125,35 @@ export default async function ProjectPage({ params }: Props) {
                 {project.impact.map((item, i) => (
                   <li
                     key={item}
-                    className="flex gap-3 rounded-xl border border-card-border bg-card/50 p-5 text-sm leading-relaxed text-muted sm:text-base"
+                    className="flex gap-3 rounded-xl border border-card-border bg-card/50 p-4 text-sm leading-relaxed text-muted sm:p-5 sm:text-base"
                   >
                     <span className="shrink-0 font-mono text-xs text-accent">
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <span>{item}</span>
+                    <span className="min-w-0 break-words">{item}</span>
                   </li>
                 ))}
               </ul>
             </section>
 
-            {/* Deep-dive sections */}
             {project.sections && project.sections.length > 0 && (
-              <section className="space-y-10">
+              <section className="space-y-6 sm:space-y-10">
                 <h2 className="font-mono text-sm text-accent">
                   $ less deep-dive.md
                 </h2>
                 {project.sections.map((section) => (
                   <div
                     key={section.title}
-                    className="rounded-2xl border border-card-border bg-card/40 p-6 sm:p-8"
+                    className="rounded-2xl border border-card-border bg-card/40 p-5 sm:p-8"
                   >
-                    <h3 className="text-xl font-semibold tracking-tight text-foreground">
+                    <h3 className="text-lg font-semibold tracking-tight text-foreground sm:text-xl">
                       {section.title}
                     </h3>
                     <div className="mt-4 space-y-3">
                       {section.paragraphs.map((p) => (
                         <p
                           key={p}
-                          className="text-base leading-relaxed text-muted"
+                          className="text-sm leading-relaxed text-muted sm:text-base"
                         >
                           {p}
                         </p>
@@ -158,11 +164,8 @@ export default async function ProjectPage({ params }: Props) {
               </section>
             )}
 
-            {/* Tech stack */}
             <section>
-              <h2 className="mb-4 font-mono text-sm text-accent">
-                $ ls tech/
-              </h2>
+              <h2 className="mb-4 font-mono text-sm text-accent">$ ls tech/</h2>
               <div className="flex flex-wrap gap-2">
                 {project.tags.map((tag) => (
                   <span
@@ -175,8 +178,7 @@ export default async function ProjectPage({ params }: Props) {
               </div>
             </section>
 
-            {/* CTA */}
-            <section className="glow-border rounded-2xl border border-card-border bg-card p-6 sm:p-8">
+            <section className="glow-border rounded-2xl border border-card-border bg-card p-5 sm:p-8">
               <p className="font-mono text-xs text-accent">
                 $ echo &quot;want something similar?&quot;
               </p>
@@ -189,20 +191,19 @@ export default async function ProjectPage({ params }: Props) {
               <div className="mt-6 flex flex-wrap gap-3 font-mono text-sm">
                 <Link
                   href="/#contact"
-                  className="rounded-lg bg-accent px-5 py-2.5 font-medium text-background transition hover:brightness-110"
+                  className="inline-flex min-h-11 items-center rounded-lg bg-accent px-5 py-2.5 font-medium text-background transition hover:brightness-110"
                 >
                   get in touch
                 </Link>
                 <Link
                   href="/#projects"
-                  className="rounded-lg border border-card-border px-5 py-2.5 text-muted transition hover:border-accent/40 hover:text-accent"
+                  className="inline-flex min-h-11 items-center rounded-lg border border-card-border px-5 py-2.5 text-muted transition hover:border-accent/40 hover:text-accent"
                 >
                   ← back to projects
                 </Link>
               </div>
             </section>
 
-            {/* Other projects */}
             {otherProjects.length > 0 && (
               <section>
                 <h2 className="mb-4 font-mono text-sm text-accent">
@@ -218,7 +219,7 @@ export default async function ProjectPage({ params }: Props) {
                         <p className="font-mono text-[10px] text-muted">
                           {p.year}
                         </p>
-                        <p className="mt-1 text-sm font-semibold text-foreground group-hover:text-accent">
+                        <p className="mt-1 text-sm font-semibold text-foreground break-words group-hover:text-accent">
                           {p.title}
                         </p>
                         <p className="mt-1 line-clamp-2 text-xs text-muted">
