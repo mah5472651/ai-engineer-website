@@ -88,12 +88,22 @@ export const skills = {
   ],
 };
 
+export type ProjectSection = {
+  title: string;
+  paragraphs: string[];
+};
+
 export type Project = {
   slug: string;
   title: string;
+  /** Short blurb shown on homepage cards */
   summary: string;
+  /** Longer intro for the project landing page hero */
   description: string;
+  /** Key contribution bullets on the detail page */
   impact: string[];
+  /** Optional deep-dive sections for the full landing page */
+  sections?: ProjectSection[];
   tags: string[];
   year: string;
   links: {
@@ -110,13 +120,36 @@ export const projects: Project[] = [
     title: "Aeitron — Scratch-Trained Cybersecurity & Agentic Coding LLM",
     year: "Present",
     summary:
-      "From-scratch cybersecurity LLM with a full training control plane, curriculum-first defensive data mixing, and a distributed training workspace for gated qualification and promotion.",
+      "From-scratch cybersecurity LLM with training control plane, defensive data mixing, and distributed training.",
     description:
-      "Designed and built a full training control plane for a from-scratch cybersecurity and agentic coding LLM. The system covers tokenizer and data pipelines, evaluation harnesses, a gated qualification staircase (1k→1M step milestones) with checkpoint reload-verification and regression gates before promotion, curriculum-first defensive-only data mixing with hallucination guardrails, and a distributed training workspace with production readiness contracts.",
+      "Designed and built a full training control plane for a from-scratch cybersecurity and agentic coding LLM — covering tokenizer/data pipelines, evaluation harnesses, gated qualification, defensive-only curriculum data, and a distributed training workspace with production readiness contracts.",
     impact: [
       "Designed and built a full training control plane for a from-scratch cybersecurity LLM, including tokenizer/data pipelines, evaluation harnesses, and a gated qualification staircase (1k→1M step milestones) requiring checkpoint reload-verification and regression gates before promotion.",
       "Built a curriculum-first defensive-only data mixing system that filters offensive misuse patterns and enforces hallucination guardrails (no fabricated CVEs, no unverified test-pass claims).",
       "Implemented a distributed training workspace with Postgres-backed job state machine, FSDP/DeepSpeed/Megatron scheduler adapters, and production readiness contracts distinguishing proven vs. cluster-unproven components.",
+    ],
+    sections: [
+      {
+        title: "Training control plane",
+        paragraphs: [
+          "End-to-end ownership of the training lifecycle for a cybersecurity LLM trained from scratch: tokenizer and data pipelines, evaluation harnesses, and promotion policy as code.",
+          "A gated qualification staircase (1k → 1M step milestones) blocks unsafe promotions. Each milestone requires checkpoint reload-verification and regression gates before a build can advance.",
+        ],
+      },
+      {
+        title: "Defensive-only data curriculum",
+        paragraphs: [
+          "Curriculum-first data mixing keeps the model oriented toward defensive cybersecurity and agentic coding assistance — not offensive misuse.",
+          "Guardrails reject offensive patterns and hallucination failure modes such as fabricated CVEs or unverified “test pass” claims, so evaluation and training stay aligned with safe deployment goals.",
+        ],
+      },
+      {
+        title: "Distributed training workspace",
+        paragraphs: [
+          "Postgres-backed job state machine tracks runs, stages, and promotion eligibility across the cluster.",
+          "Scheduler adapters for FSDP, DeepSpeed, and Megatron, plus production readiness contracts that clearly separate proven components from cluster-unproven experiments.",
+        ],
+      },
     ],
     tags: [
       "PyTorch",
@@ -140,13 +173,35 @@ export const projects: Project[] = [
     title: "Aeitron AI Finance Dashboard",
     year: "Present",
     summary:
-      "Enterprise dashboard unifying finance, invoicing, CRM, and team tools — with an AI copilot and real-time analytics for real estate leads.",
+      "Unified Agency OS for finance, invoicing, CRM, and team tools with an AI copilot.",
     description:
-      "A comprehensive Unified Agency OS for finance tracking, automated invoicing, CRM, and team management. Includes an AI business assistant for real-time operational analytics and automated pipeline tracking for real estate leads, built with a premium React + Vite + TypeScript + Tailwind frontend.",
+      "A comprehensive Unified Agency OS for finance tracking, automated invoicing, CRM, and team management — with an AI business assistant for real-time operational analytics and automated pipeline tracking for real estate leads.",
     impact: [
       "Unified Agency OS: Engineered a comprehensive enterprise dashboard unifying finance tracking, automated invoicing, CRM, and team management tools.",
       "AI Copilot & Real-Time Analytics: Integrated an AI business assistant providing real-time operational analytics and automated pipeline tracking for real estate leads.",
       "Premium Frontend Stack: Developed a highly responsive, minimalist, and scalable UI from scratch using React, Vite, TypeScript, and Tailwind CSS.",
+    ],
+    sections: [
+      {
+        title: "Unified Agency OS",
+        paragraphs: [
+          "One surface for operators: finance tracking, automated invoicing, CRM, and team management — designed for high-ticket agency workflows, especially real estate.",
+          "The product goal is fewer tools and clearer state: what money moved, which leads are hot, and who owns the next action.",
+        ],
+      },
+      {
+        title: "AI copilot & analytics",
+        paragraphs: [
+          "An AI business assistant surfaces operational analytics in real time and helps track pipeline movement for real estate leads.",
+          "Copilot flows sit on top of the same operational data the dashboard already trusts — not a disconnected chat demo.",
+        ],
+      },
+      {
+        title: "Frontend architecture",
+        paragraphs: [
+          "Built from scratch with React, Vite, TypeScript, and Tailwind CSS for a minimalist, responsive UI that scales with new modules without layout debt.",
+        ],
+      },
     ],
     tags: [
       "React",
@@ -162,6 +217,10 @@ export const projects: Project[] = [
     featured: true,
   },
 ];
+
+export function getProjectBySlug(slug: string): Project | undefined {
+  return projects.find((p) => p.slug === slug);
+}
 
 export const experience = [
   {
