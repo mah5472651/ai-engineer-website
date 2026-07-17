@@ -4,9 +4,11 @@ Dark tech / terminal-style portfolio for an AI engineer. Built with **Next.js** 
 
 Includes:
 
-- Full portfolio (hero, about, skills, projects, experience, contact)
-- Project case study pages (`/projects/[slug]`)
+- Full portfolio (hero, about, skills, projects, experience, education, contact)
+- Project case studies with metrics + architecture diagrams (`/projects/[slug]`)
 - Blog listing + posts (`/blog`, `/blog/[slug]`)
+- Dynamic Open Graph / Twitter images
+- Ambient AI animations (respects `prefers-reduced-motion`)
 - Downloadable resume (`public/resume.pdf`)
 
 ## Quick start

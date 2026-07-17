@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { formatPostDate, getAllPosts } from "@/data/blog";
+import Reveal from "./Reveal";
 import SectionHeading from "./SectionHeading";
 
 export default function BlogPreview() {
@@ -23,32 +24,33 @@ export default function BlogPreview() {
         </div>
 
         <div className="grid gap-4 md:grid-cols-3">
-          {latest.map((post) => (
-            <Link
-              key={post.slug}
-              href={`/blog/${post.slug}`}
-              className="group flex flex-col rounded-xl border border-card-border bg-card/60 p-5 transition hover:border-accent/35"
-            >
-              <p className="font-mono text-[11px] text-muted">
-                {formatPostDate(post.date)} · {post.readingMinutes} min
-              </p>
-              <h3 className="mt-2 text-base font-semibold leading-snug text-foreground group-hover:text-accent">
-                {post.title}
-              </h3>
-              <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">
-                {post.description}
-              </p>
-              <div className="mt-4 flex flex-wrap gap-1.5">
-                {post.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="rounded bg-background/80 px-2 py-0.5 font-mono text-[10px] text-accent-2"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </Link>
+          {latest.map((post, i) => (
+            <Reveal key={post.slug} delay={i * 80} variant="up">
+              <Link
+                href={`/blog/${post.slug}`}
+                className="card-lift group flex h-full flex-col rounded-xl border border-card-border bg-card/60 p-5"
+              >
+                <p className="font-mono text-[11px] text-muted">
+                  {formatPostDate(post.date)} · {post.readingMinutes} min
+                </p>
+                <h3 className="mt-2 text-base font-semibold leading-snug text-foreground group-hover:text-accent">
+                  {post.title}
+                </h3>
+                <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">
+                  {post.description}
+                </p>
+                <div className="mt-4 flex flex-wrap gap-1.5">
+                  {post.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="rounded bg-background/80 px-2 py-0.5 font-mono text-[10px] text-accent-2"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </Link>
+            </Reveal>
           ))}
         </div>
       </div>

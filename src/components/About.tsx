@@ -1,4 +1,5 @@
 import { about, site } from "@/data/portfolio";
+import Reveal from "./Reveal";
 import SectionHeading from "./SectionHeading";
 
 export default function About() {
@@ -12,23 +13,22 @@ export default function About() {
         />
 
         <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr]">
-          <div className="space-y-4 text-base leading-relaxed text-muted sm:text-lg">
+          <Reveal variant="left" className="space-y-4 text-base leading-relaxed text-muted sm:text-lg">
             {about.paragraphs.map((p, i) => (
               <p key={i}>{p}</p>
             ))}
-          </div>
+          </Reveal>
 
-          <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
-            {about.highlights.map((h) => (
-              <div
-                key={h.label}
-                className="rounded-xl border border-card-border bg-card/80 p-5 transition hover:border-accent/30"
-              >
-                <p className="font-mono text-2xl font-semibold text-accent sm:text-3xl">
-                  {h.value}
-                </p>
-                <p className="mt-1 font-mono text-xs text-muted">{h.label}</p>
-              </div>
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
+            {about.highlights.map((h, i) => (
+              <Reveal key={h.label} delay={i * 80} variant="scale">
+                <div className="card-lift rounded-xl border border-card-border bg-card/80 p-5">
+                  <p className="font-mono text-2xl font-semibold text-accent sm:text-3xl">
+                    {h.value}
+                  </p>
+                  <p className="mt-1 font-mono text-xs text-muted">{h.label}</p>
+                </div>
+              </Reveal>
             ))}
           </div>
         </div>

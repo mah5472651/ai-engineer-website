@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import NeuralBackdrop from "@/components/NeuralBackdrop";
 import { site } from "@/data/portfolio";
 import {
   personJsonLd,
@@ -102,6 +103,7 @@ export default function RootLayout({
         <a href="#main-content" className="skip-link">
           Skip to main content
         </a>
+        <NeuralBackdrop />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

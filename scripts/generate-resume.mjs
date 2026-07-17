@@ -23,7 +23,7 @@ const site = {
 };
 
 const summary =
-  "High-growth AI Engineer bridging advanced research and production-grade AI systems. COO of Craftly (building a frontier LLM) and Founder & CEO at Aeitron AI (multi-agent automation for high-ticket sectors). Specialized in multi-agent orchestration, advanced memory architectures, cybersecurity intelligence, and high-performance RAG pipelines.";
+  "AI engineer bridging advanced research and production-grade systems. COO of Craftly (frontier LLM productization) and Founder & CEO at Aeitron AI (multi-agent automation for high-ticket sectors). Focus: multi-agent orchestration, high-performance RAG, eval gates, cybersecurity LLM infrastructure.";
 
 const experience = [
   {
@@ -32,9 +32,9 @@ const experience = [
     period: "Present",
     location: "Bangladesh / Remote",
     bullets: [
-      "Serve as COO while building a frontier LLM — aligning research, engineering, and product delivery.",
-      "Drive production-grade AI systems: evaluation, reliability, and the path from prototype to shippable capability.",
-      "Lead cross-functional teams to compete at a global level from Bangladesh.",
+      "Serve as COO while shipping frontier LLM capability — aligning research, engineering, and product delivery.",
+      "Own production path: evaluation, reliability, and promotion criteria from prototype to shippable systems.",
+      "Lead cross-functional teams building competitive AI products from Bangladesh.",
     ],
   },
   {
@@ -43,21 +43,38 @@ const experience = [
     period: "Present",
     location: "Barishal, Bangladesh / Remote",
     bullets: [
-      "Founded Aeitron AI to engineer multi-agent automation workflows for high-ticket sectors including real estate.",
-      "Specialize in multi-agent orchestration, advanced memory architectures, and high-performance RAG pipelines.",
-      "Own product vision and technical direction for automation systems that operators can trust in production.",
+      "Founded Aeitron AI for multi-agent automation in high-ticket sectors including real estate.",
+      "Specialize in multi-agent orchestration, memory architectures, and high-performance RAG pipelines.",
+      "Own product vision and technical direction for automation operators can trust in production.",
     ],
+  },
+];
+
+const education = [
+  {
+    school: "Applied AI engineering track",
+    degree: "Production LLMs · Agents · RAG · Distributed training",
+    period: "2022 — Present",
+    location: "Barishal, Bangladesh / Remote",
   },
 ];
 
 const projects = [
   {
     title: "Aeitron — Scratch-Trained Cybersecurity & Agentic Coding LLM",
-    line: "From-scratch cybersecurity LLM: training control plane, defensive data mixing, FSDP/DeepSpeed workspace, and gated 1k→1M qualification.",
+    line: "From-scratch cybersecurity LLM: training control plane, defensive data mixing, FSDP/DeepSpeed, gated 1k→1M qualification.",
   },
   {
     title: "Aeitron AI Finance Dashboard",
     line: "Unified Agency OS for finance, invoicing, CRM, and team tools with an AI copilot for real estate lead analytics.",
+  },
+  {
+    title: "VectorForge — Hybrid RAG Retrieval",
+    line: "Hybrid BM25 + dense + RRF + re-rank under ≤180ms p99 retrieval budget; Recall@k / nDCG / faithfulness tracked.",
+  },
+  {
+    title: "Agent Release Gates — Eval CI for Agents",
+    line: "Merge-blocking agent evals (~120 tasks), faithfulness/tool gates, 5% canary with automatic rollback.",
   },
 ];
 
@@ -156,6 +173,22 @@ for (const job of experience) {
     doc.text(`•  ${b}`, { indent: 8, lineGap: 1.5 });
   }
   doc.moveDown(0.35);
+}
+
+// Education
+sectionTitle(doc, "Education");
+for (const ed of education) {
+  doc
+    .font("Helvetica-Bold")
+    .fontSize(10.5)
+    .fillColor(colors.text)
+    .text(ed.degree);
+  doc
+    .font("Helvetica")
+    .fontSize(9.5)
+    .fillColor(colors.muted)
+    .text(`${ed.school}  ·  ${ed.period}  ·  ${ed.location}`);
+  doc.moveDown(0.3);
 }
 
 // Projects

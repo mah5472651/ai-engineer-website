@@ -1,8 +1,11 @@
 import { contact, site } from "@/data/portfolio";
+import { maskPhone, whatsappCtaLabel } from "@/lib/privacy";
 import SectionHeading from "./SectionHeading";
 
 export default function Contact() {
   const mailHref = site.emailHref;
+  const maskedPhone = maskPhone(site.whatsapp.phone);
+  const waLabel = whatsappCtaLabel(site.whatsapp.username);
 
   return (
     <section id="contact" className="scroll-mt-20 px-4 py-16 sm:px-8 sm:py-24">
@@ -31,7 +34,7 @@ export default function Contact() {
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 <a
                   href={mailHref}
-                  className="inline-flex min-h-11 max-w-full cursor-pointer items-center justify-center break-anywhere rounded-lg bg-accent px-4 py-2.5 font-mono text-xs font-medium text-background transition hover:brightness-110 sm:text-sm"
+                  className="btn-glow inline-flex min-h-11 max-w-full cursor-pointer items-center justify-center break-anywhere rounded-lg bg-accent px-4 py-2.5 font-mono text-xs font-medium text-background sm:text-sm"
                   aria-label={`Send email to ${site.email}`}
                 >
                   {site.email}
@@ -41,12 +44,13 @@ export default function Contact() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex min-h-11 cursor-pointer items-center justify-center rounded-lg border border-accent/40 bg-accent/10 px-5 py-2.5 font-mono text-sm text-accent transition hover:bg-accent/20"
+                  aria-label={waLabel}
                 >
-                  WhatsApp
+                  {waLabel}
                 </a>
               </div>
               <p className="mt-3 font-mono text-[11px] text-muted">
-                Click email → opens your mail app (Gmail / Outlook / Mail)
+                Primary: email · WhatsApp for quick follow-ups (number not shown in full)
               </p>
             </div>
 
@@ -72,8 +76,9 @@ export default function Contact() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="cursor-pointer text-foreground hover:text-accent"
+                    title="Opens WhatsApp chat"
                   >
-                    {site.whatsapp.phone}
+                    {maskedPhone}
                   </a>
                 </li>
                 <li>

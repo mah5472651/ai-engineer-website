@@ -4,12 +4,14 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useId, useState } from "react";
 import { site } from "@/data/portfolio";
+import ScrollProgress from "./ScrollProgress";
 
 const sectionLinks = [
   { href: "/#about", label: "about" },
   { href: "/#skills", label: "skills" },
   { href: "/#projects", label: "projects" },
   { href: "/#experience", label: "experience" },
+  { href: "/#education", label: "education" },
   { href: "/blog", label: "blog" },
   { href: "/#contact", label: "contact" },
 ];
@@ -140,6 +142,7 @@ export default function Navbar() {
           </li>
         </ul>
       </div>
+      <ScrollProgress />
     </header>
   );
 }

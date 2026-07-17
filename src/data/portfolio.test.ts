@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   about,
   contact,
+  education,
   experience,
   projects,
   site,
@@ -57,29 +58,66 @@ describe("projects", () => {
     }
   });
 
-  it("requires summary, description, tags, and at least one impact bullet", () => {
+  it("requires summary, description, tags, metrics, access, and impact", () => {
     for (const p of projects) {
       expect(p.title.trim().length).toBeGreaterThan(0);
       expect(p.summary.trim().length).toBeGreaterThan(0);
       expect(p.description.trim().length).toBeGreaterThan(0);
       expect(p.impact.length).toBeGreaterThan(0);
       expect(p.tags.length).toBeGreaterThan(0);
+      expect(p.metrics.length).toBeGreaterThan(0);
+      expect(["public", "private", "case-study"]).toContain(p.access);
       expect(p.year.trim().length).toBeGreaterThan(0);
     }
+  });
+
+  it("has at least three projects for a competitive portfolio grid", () => {
+    expect(projects.length).toBeGreaterThanOrEqual(3);
   });
 
   it("has at least one featured project for the homepage grid", () => {
     expect(projects.some((p) => p.featured)).toBe(true);
   });
+
+  it("links writeups to site-relative paths or absolute URLs when present", () => {
+    for (const p of projects) {
+      if (!p.links.writeup) continue;
+      expect(
+        p.links.writeup.startsWith("/") || p.links.writeup.startsWith("https://"),
+      ).toBe(true);
+    }
+  });
+
+  it("architecture graphs only reference known node ids", () => {
+    for (const p of projects) {
+      if (!p.architecture) continue;
+      const ids = new Set(p.architecture.nodes.map((n) => n.id));
+      for (const e of p.architecture.edges) {
+        expect(ids.has(e.from), `${p.slug} edge from ${e.from}`).toBe(true);
+        expect(ids.has(e.to), `${p.slug} edge to ${e.to}`).toBe(true);
+      }
+    }
+  });
 });
 
-describe("experience & skills", () => {
+describe("experience, education & skills", () => {
   it("lists experience with company, role, and bullets", () => {
     expect(experience.length).toBeGreaterThan(0);
     for (const job of experience) {
       expect(job.company.trim().length).toBeGreaterThan(0);
       expect(job.role.trim().length).toBeGreaterThan(0);
       expect(job.bullets.length).toBeGreaterThan(0);
+    }
+  });
+
+  it("has real education entries (not PDF-only placeholders)", () => {
+    expect(education.length).toBeGreaterThan(0);
+    for (const ed of education) {
+      expect(ed.school.trim().length).toBeGreaterThan(0);
+      expect(ed.degree.trim().length).toBeGreaterThan(0);
+      expect(ed.period.trim().length).toBeGreaterThan(0);
+      expect(ed.school).not.toMatch(/see resume/i);
+      expect(ed.degree).not.toMatch(/download resume/i);
     }
   });
 
@@ -100,7 +138,7 @@ describe("experience & skills", () => {
 
 describe("identity consistency", () => {
   it("does not ship placeholder template identity (Alex Rivera)", () => {
-    const blob = JSON.stringify({ site, about, experience, projects });
+    const blob = JSON.stringify({ site, about, experience, projects, education });
     expect(blob).not.toMatch(/Alex Rivera/i);
     expect(blob).not.toMatch(/alex\.rivera@example\.com/i);
     expect(blob).not.toMatch(/Nova Labs/i);

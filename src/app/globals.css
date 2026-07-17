@@ -133,7 +133,7 @@ body {
 @keyframes fade-up {
   from {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(16px);
   }
   to {
     opacity: 1;
@@ -141,21 +141,196 @@ body {
   }
 }
 
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes float-soft {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes glow-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% center;
+  }
+  100% {
+    background-position: -200% center;
+  }
+}
+
 .animate-fade-up {
-  animation: fade-up 0.6s ease-out both;
+  animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.6s ease-out both;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-float {
+  animation: float-soft 6s ease-in-out infinite;
 }
 
 .delay-1 {
-  animation-delay: 0.1s;
+  animation-delay: 0.08s;
 }
 .delay-2 {
-  animation-delay: 0.2s;
+  animation-delay: 0.16s;
 }
 .delay-3 {
-  animation-delay: 0.3s;
+  animation-delay: 0.24s;
 }
 .delay-4 {
+  animation-delay: 0.32s;
+}
+.delay-5 {
   animation-delay: 0.4s;
+}
+
+/* ── Scroll reveal (driven by Reveal.tsx) ── */
+.reveal {
+  opacity: 0;
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-up {
+  transform: translateY(28px);
+}
+.reveal-down {
+  transform: translateY(-20px);
+}
+.reveal-left {
+  transform: translateX(-28px);
+}
+.reveal-right {
+  transform: translateX(28px);
+}
+.reveal-scale {
+  transform: scale(0.94) translateY(12px);
+}
+.reveal-fade {
+  transform: none;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+/* Interactive cards */
+.card-lift {
+  transition:
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    background-color 0.3s ease;
+}
+
+.card-lift:hover {
+  transform: translateY(-4px);
+  border-color: color-mix(in srgb, var(--accent) 35%, var(--card-border));
+  box-shadow: 0 12px 40px -16px var(--accent-dim);
+}
+
+.card-lift:active {
+  transform: translateY(-1px);
+}
+
+/* Skill / tag chips */
+.chip-pop {
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.chip-pop:hover {
+  transform: translateY(-2px) scale(1.03);
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--card-border));
+  color: var(--accent);
+}
+
+/* Primary button glow pulse on idle */
+.btn-glow {
+  transition:
+    transform 0.2s ease,
+    filter 0.2s ease,
+    box-shadow 0.3s ease;
+}
+
+.btn-glow:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.08);
+  box-shadow: 0 0 28px -4px var(--accent-dim);
+}
+
+.btn-glow:active {
+  transform: translateY(0);
+}
+
+/* Soft ambient orbs in hero */
+.hero-orb {
+  animation: float-soft 8s ease-in-out infinite, glow-pulse 5s ease-in-out infinite;
+}
+
+.hero-orb-delay {
+  animation-delay: 1.2s, 0.6s;
+}
+
+/* Terminal code block entrance */
+.terminal-panel {
+  animation: scale-in 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+}
+
+/* Mobile menu slide */
+.nav-drawer {
+  animation: fade-up 0.28s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Timeline node pulse for current role */
+.timeline-live {
+  animation: glow-pulse 2.4s ease-in-out infinite;
 }
 
 /* Selection */
@@ -196,3 +371,133 @@ a:focus:not(:focus-visible),
 button:focus:not(:focus-visible) {
   outline: none;
 }
+
+/* ── AI ambient backdrop (NeuralBackdrop) ── */
+.neural-orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(64px);
+  opacity: 0.45;
+  will-change: transform, opacity;
+  animation: neural-drift 18s ease-in-out infinite;
+}
+
+.neural-orb-a {
+  top: -8%;
+  left: 15%;
+  width: min(42vw, 28rem);
+  height: min(42vw, 28rem);
+  background: radial-gradient(circle, #00e5a828 0%, transparent 70%);
+}
+
+.neural-orb-b {
+  top: 40%;
+  right: -5%;
+  width: min(36vw, 22rem);
+  height: min(36vw, 22rem);
+  background: radial-gradient(circle, #38bdf822 0%, transparent 70%);
+  animation-delay: -6s;
+  animation-duration: 22s;
+}
+
+.neural-orb-c {
+  bottom: -10%;
+  left: 30%;
+  width: min(40vw, 24rem);
+  height: min(40vw, 24rem);
+  background: radial-gradient(circle, #00e5a814 0%, transparent 70%);
+  animation-delay: -11s;
+  animation-duration: 26s;
+}
+
+.neural-scanline {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    #00e5a806 50%,
+    transparent 100%
+  );
+  background-size: 100% 220%;
+  animation: neural-scan 14s linear infinite;
+  opacity: 0.35;
+  mix-blend-mode: screen;
+}
+
+@keyframes neural-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.35;
+  }
+  50% {
+    transform: translate3d(2%, -3%, 0) scale(1.08);
+    opacity: 0.55;
+  }
+}
+
+@keyframes neural-scan {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 0% 100%;
+  }
+}
+
+/* Architecture diagram entrance */
+.arch-node {
+  opacity: 0;
+  animation: fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.arch-node-svg {
+  opacity: 0;
+  animation: fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.arch-edge {
+  stroke-dasharray: 6 8;
+  animation: arch-dash 1.6s linear infinite;
+}
+
+@keyframes arch-dash {
+  to {
+    stroke-dashoffset: -28;
+  }
+}
+
+.metric-chip {
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
+}
+
+.metric-chip:hover {
+  border-color: color-mix(in srgb, var(--accent) 40%, var(--card-border));
+  box-shadow: 0 0 24px -12px var(--accent-dim);
+  transform: translateY(-1px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .neural-orb,
+  .neural-scanline,
+  .arch-edge,
+  .arch-pulse,
+  .arch-node,
+  .arch-node-svg {
+    animation: none !important;
+  }
+
+  .neural-orb {
+    opacity: 0.25;
+  }
+
+  .arch-node,
+  .arch-node-svg {
+    opacity: 1;
+  }
+}
+

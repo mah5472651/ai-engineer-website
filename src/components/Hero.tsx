@@ -1,6 +1,8 @@
 import { site } from "@/data/portfolio";
 
-const socialEntries = Object.entries(site.social);
+const socialEntries = Object.entries(site.social).filter(
+  ([key]) => key !== "whatsapp",
+);
 
 export default function Hero() {
   return (
@@ -9,18 +11,14 @@ export default function Hero() {
       className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden px-4 pb-16 pt-24 sm:px-8 sm:pb-20 sm:pt-28"
     >
       {/* Soft ambient glow — decorative only */}
-      <div
-        className="pointer-events-none absolute inset-0 -z-10"
-        aria-hidden
-      >
-        <div className="absolute left-1/2 top-0 h-[28rem] w-[min(100%,42rem)] -translate-x-1/2 rounded-full bg-accent/[0.07] blur-3xl" />
-        <div className="absolute bottom-10 right-0 h-64 w-64 rounded-full bg-accent-2/[0.06] blur-3xl" />
+      <div className="pointer-events-none absolute inset-0 -z-10" aria-hidden>
+        <div className="hero-orb absolute left-1/2 top-0 h-[28rem] w-[min(100%,42rem)] -translate-x-1/2 rounded-full bg-accent/[0.07] blur-3xl" />
+        <div className="hero-orb hero-orb-delay absolute bottom-10 right-0 h-64 w-64 rounded-full bg-accent-2/[0.06] blur-3xl" />
       </div>
 
       <div className="mx-auto grid w-full max-w-6xl items-center gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-12 xl:gap-16">
         {/* ── Left: identity ── */}
         <div className="min-w-0">
-          {/* Live status — compact, never drops alone */}
           <div className="animate-fade-up mb-6 flex flex-wrap items-center gap-2">
             <span className="hero-status inline-flex items-center gap-2 rounded-full border border-accent/25 bg-accent/10 px-3 py-1.5 font-mono text-[11px] font-medium tracking-wide text-accent sm:text-xs">
               <span className="relative flex h-2 w-2 shrink-0" aria-hidden>
@@ -52,12 +50,11 @@ export default function Hero() {
             {site.heroExtra}
           </p>
 
-          {/* CTAs + social in one controlled row group */}
           <div className="animate-fade-up delay-3 mt-8 flex flex-col gap-5 sm:mt-10">
             <div className="flex flex-wrap items-center gap-3">
               <a
                 href="#projects"
-                className="inline-flex min-h-11 items-center justify-center rounded-lg bg-accent px-5 py-2.5 font-mono text-sm font-medium text-background shadow-[0_0_24px_-6px_var(--accent-dim)] transition hover:brightness-110"
+                className="btn-glow inline-flex min-h-11 items-center justify-center rounded-lg bg-accent px-5 py-2.5 font-mono text-sm font-medium text-background shadow-[0_0_24px_-6px_var(--accent-dim)]"
               >
                 view projects
               </a>
@@ -86,19 +83,27 @@ export default function Hero() {
                   href={url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex min-h-9 items-center rounded-md border border-card-border bg-card/50 px-3 py-1.5 font-mono text-xs text-muted transition hover:border-accent/35 hover:bg-accent/5 hover:text-accent"
+                  className="chip-pop inline-flex min-h-9 items-center rounded-md border border-card-border bg-card/50 px-3 py-1.5 font-mono text-xs text-muted"
                 >
                   {key}
                 </a>
               ))}
+              <a
+                href={site.whatsapp.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="chip-pop inline-flex min-h-9 items-center rounded-md border border-card-border bg-card/50 px-3 py-1.5 font-mono text-xs text-muted"
+                aria-label="WhatsApp"
+              >
+                whatsapp
+              </a>
             </div>
           </div>
         </div>
 
         {/* ── Right: terminal card ── */}
         <div className="animate-fade-up delay-2 min-w-0 lg:justify-self-end">
-          <div className="glow-border relative w-full max-w-xl overflow-hidden rounded-2xl border border-card-border bg-card/90 shadow-2xl backdrop-blur-sm lg:max-w-none">
-            {/* Window chrome */}
+          <div className="terminal-panel glow-border relative w-full max-w-xl overflow-hidden rounded-2xl border border-card-border bg-card/90 shadow-2xl backdrop-blur-sm lg:max-w-none">
             <div className="flex items-center gap-3 border-b border-card-border px-4 py-3">
               <div className="flex items-center gap-1.5" aria-hidden>
                 <span className="h-2.5 w-2.5 rounded-full bg-danger/85" />
@@ -114,7 +119,6 @@ export default function Hero() {
               </span>
             </div>
 
-            {/* Terminal body */}
             <div className="space-y-3 p-4 font-mono text-[12px] leading-relaxed sm:p-5 sm:text-[13px]">
               <p className="text-muted">
                 <span className="text-accent">➜</span>{" "}
@@ -166,7 +170,6 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Small caption under terminal — desktop only balance */}
           <p className="mt-3 hidden text-center font-mono text-[10px] text-muted/70 lg:block">
             production AI · agents · RAG · cybersecurity
           </p>

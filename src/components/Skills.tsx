@@ -1,4 +1,5 @@
 import { skills } from "@/data/portfolio";
+import Reveal from "./Reveal";
 import SectionHeading from "./SectionHeading";
 
 export default function Skills() {
@@ -12,25 +13,24 @@ export default function Skills() {
         />
 
         <div className="grid gap-4 sm:grid-cols-2">
-          {skills.categories.map((cat) => (
-            <div
-              key={cat.title}
-              className="rounded-xl border border-card-border bg-card/60 p-6 transition hover:border-accent/25"
-            >
-              <h3 className="mb-4 font-mono text-sm font-medium text-accent">
-                {cat.title}
-              </h3>
-              <ul className="flex flex-wrap gap-2">
-                {cat.items.map((item) => (
-                  <li
-                    key={item}
-                    className="rounded-md border border-card-border bg-background/60 px-2.5 py-1 font-mono text-xs text-foreground/85 transition hover:border-accent/40 hover:text-accent"
-                  >
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
+          {skills.categories.map((cat, i) => (
+            <Reveal key={cat.title} delay={i * 80} variant="up">
+              <div className="card-lift rounded-xl border border-card-border bg-card/60 p-6">
+                <h3 className="mb-4 font-mono text-sm font-medium text-accent">
+                  {cat.title}
+                </h3>
+                <ul className="flex flex-wrap gap-2">
+                  {cat.items.map((item) => (
+                    <li
+                      key={item}
+                      className="chip-pop rounded-md border border-card-border bg-background/60 px-2.5 py-1 font-mono text-xs text-foreground/85"
+                    >
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </Reveal>
           ))}
         </div>
       </div>

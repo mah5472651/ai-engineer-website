@@ -1,15 +1,15 @@
 /**
  * Portfolio content — Mahmud Hasan
+ * Single source of truth for site UI, SEO copy, and resume integrity tests.
  */
 
 export const site = {
   name: "Mahmud Hasan",
   role: "AI Engineer",
-  tagline:
-    "Bridging advanced AI research and production-grade systems.",
+  tagline: "Bridging advanced AI research and production-grade systems.",
   /** Extra hero line (kept in data so UI copy does not drift) */
   heroExtra:
-    "Multi-agent systems, high-performance RAG, and frontier LLM productization — from Bangladesh to global scale.",
+    "Multi-agent systems, high-performance RAG, and LLM productization — from Bangladesh to global scale.",
   heroRoles: "coo @ craftly · founder & ceo @ aeitron ai",
   heroFocus: "multi-agent · memory · rag · cybersecurity intelligence",
   email: "mah5472651@gmail.com",
@@ -33,14 +33,15 @@ export const site = {
 
 export const about = {
   paragraphs: [
-    "High-growth AI Engineer bridging the gap between advanced research and production-grade AI systems. Serving concurrently as the COO of Craftly (building a frontier LLM) and Founder & CEO at Aeitron AI (engineering multi-agent automation workflows for high-ticket sectors like real estate).",
-    "Specialized in multi-agent orchestration, advanced memory architectures, cybersecurity intelligence, and high-performance RAG pipelines.",
-    "Proven track record of leading cross-functional engineering teams to build globally competitive AI technology from Bangladesh.",
+    "AI engineer focused on systems that survive contact with production: evaluation gates, retrieval quality, agent reliability, and training control planes — not demos that only work in a notebook.",
+    "Concurrently COO at Craftly (frontier LLM productization) and Founder & CEO at Aeitron AI (multi-agent automation for high-ticket operations, including real estate).",
+    "Based in Barishal, Bangladesh; building globally competitive AI systems with cross-functional engineering teams.",
   ],
   highlights: [
     { label: "Roles", value: "COO + CEO" },
     { label: "Focus", value: "Agents · RAG" },
     { label: "Based in", value: "Bangladesh" },
+    { label: "Shipped focus", value: "Evals · Infra" },
   ],
 };
 
@@ -98,6 +99,29 @@ export type ProjectSection = {
   paragraphs: string[];
 };
 
+export type ProjectMetric = {
+  label: string;
+  value: string;
+};
+
+export type ArchitectureNode = {
+  id: string;
+  label: string;
+};
+
+export type ArchitectureEdge = {
+  from: string;
+  to: string;
+};
+
+export type ProjectArchitecture = {
+  title: string;
+  nodes: ArchitectureNode[];
+  edges: ArchitectureEdge[];
+};
+
+export type ProjectAccess = "public" | "private" | "case-study";
+
 export type Project = {
   slug: string;
   title: string;
@@ -107,8 +131,12 @@ export type Project = {
   description: string;
   /** Key contribution bullets on the detail page */
   impact: string[];
+  /** Recruiter-scannable metrics (latency, coverage, cost, etc.) */
+  metrics: ProjectMetric[];
   /** Optional deep-dive sections for the full landing page */
   sections?: ProjectSection[];
+  /** Flow diagram for the project case study */
+  architecture?: ProjectArchitecture;
   tags: string[];
   year: string;
   links: {
@@ -116,6 +144,8 @@ export type Project = {
     github?: string;
     writeup?: string;
   };
+  /** How visitors can verify the work */
+  access: ProjectAccess;
   featured: boolean;
 };
 
@@ -125,99 +155,82 @@ export const projects: Project[] = [
     title: "Aeitron — Scratch-Trained Cybersecurity & Agentic Coding LLM",
     year: "Present",
     summary:
-      "From-scratch cybersecurity & agentic coding LLM: training infrastructure, safety systems, qualification pipelines, and distributed ops.",
+      "From-scratch cybersecurity & agentic coding LLM: training control plane, safety gates, and distributed ops.",
     description:
-      "Aeitron is an advanced research and engineering initiative focused on building a cybersecurity and agentic coding large language model from the ground up. Rather than fine-tuning an existing model, the project is centered around developing the infrastructure, training systems, safety mechanisms, evaluation frameworks, and operational workflows required to support a truly sovereign AI foundation. The project was designed to explore what it takes to build a production-oriented cybersecurity language model capable of reasoning about software systems, understanding complex codebases, assisting engineering workflows, and supporting defensive security operations while maintaining strict safety and reliability standards.",
+      "Aeitron is a research-and-engineering program to train a cybersecurity and agentic coding LLM with owned infrastructure — tokenizer, datasets, training orchestration, qualification gates, and defensive data governance — not a thin fine-tune on a public base model.",
+    metrics: [
+      { label: "Training path", value: "1k → 1M gated" },
+      { label: "Stack", value: "FSDP / DeepSpeed" },
+      { label: "Safety", value: "Defensive-only mix" },
+      { label: "Access", value: "Case study" },
+    ],
     impact: [
-      "Scratch-built LLM training infrastructure spanning tokenizer development, dataset management, training orchestration, and operational workflows.",
-      "Cybersecurity-focused model development workflows oriented toward defensive security, factual accuracy, and responsible outputs.",
-      "Agentic coding and software engineering foundations for reasoning about systems, codebases, and engineering assistance.",
-      "Distributed training orchestration and job management across cloud-native compute environments.",
-      "Automated checkpoint validation and qualification systems with milestone-based promotion gates.",
-      "Defensive-only data governance architecture that filters harmful patterns and prioritizes secure behavior.",
-      "Hallucination monitoring and regression testing to catch fabricated security claims and unsupported conclusions.",
-      "Experiment tracking and model lifecycle management from early milestones through production readiness.",
-      "Production-grade infrastructure readiness framework distinguishing proven components from unproven experiments.",
-      "Scalable cloud-native AI training architecture for large-scale, reliable training workloads.",
+      "Scratch-built LLM training infrastructure: tokenizer development, dataset management, training orchestration, and operational workflows.",
+      "Milestone qualification staircase — models pass eval, reload verification, and regression checks before promotion.",
+      "Defensive-only data governance that filters harmful patterns and prioritizes secure, factual behavior.",
+      "Hallucination monitoring for fabricated security claims and unsupported conclusions.",
+      "Distributed job management across cloud-native compute with checkpoint validation.",
+      "Production-readiness framework that separates proven components from experimental runs.",
     ],
     sections: [
       {
         title: "What makes Aeitron different",
         paragraphs: [
-          "Most AI products are built by adapting existing foundation models. Aeitron takes a different approach by focusing on the complete lifecycle required for training and operating a cybersecurity-focused language model from scratch — including tokenizer development, dataset management, training orchestration, evaluation systems, and qualification pipelines.",
-        ],
-      },
-      {
-        title: "Scratch-first development philosophy",
-        paragraphs: [
-          "Rather than fine-tuning an off-the-shelf model as the primary path, Aeitron invests in the full stack needed to own the foundation: data, training, evaluation, safety, and operations.",
-          "This philosophy keeps the team honest about infrastructure quality — if the control plane, datasets, or gates are weak, the model cannot progress.",
-        ],
-      },
-      {
-        title: "Cybersecurity-focused architecture",
-        paragraphs: [
-          "The platform is designed around defensive security use cases. Every major component of the training and evaluation workflow is structured to prioritize secure behavior, factual accuracy, responsible outputs, and operational reliability.",
+          "Most AI products adapt existing foundation models. Aeitron invests in the full lifecycle for a cybersecurity-focused model: data, training, evaluation, safety, and operations.",
         ],
       },
       {
         title: "Qualification-based training pipeline",
         paragraphs: [
-          "Aeitron introduces a structured model qualification staircase where training progress is validated through milestone-based checkpoints.",
-          "Models must successfully pass evaluation, reload verification, and regression testing before advancing to the next stage, helping ensure training quality remains consistent throughout the development lifecycle.",
+          "Progress is gated. Checkpoints advance only after evaluation, reload verification, and regression suites pass — so infrastructure quality is forced to keep up with model ambition.",
         ],
       },
       {
         title: "Safety and hallucination control",
         paragraphs: [
-          "The project incorporates dedicated guardrails designed to reduce unsafe behavior and misinformation.",
-          "Data pipelines are engineered to discourage harmful content patterns while evaluation systems continuously monitor for fabricated security claims, inaccurate outputs, and unsupported conclusions.",
-        ],
-      },
-      {
-        title: "Production-oriented infrastructure",
-        paragraphs: [
-          "Beyond model development, Aeitron includes the engineering systems required to operate large-scale AI workloads.",
-          "Training jobs, checkpoint management, distributed execution, infrastructure orchestration, and workflow automation are designed using modern cloud-native engineering practices.",
-        ],
-      },
-      {
-        title: "Distributed AI training workspace",
-        paragraphs: [
-          "The platform provides a centralized environment for managing model training operations, experiment tracking, job scheduling, resource allocation, and training lifecycle management across distributed compute environments.",
-        ],
-      },
-      {
-        title: "Evaluation-driven development",
-        paragraphs: [
-          "Every major training milestone is supported by automated evaluation workflows that measure model behavior, quality, consistency, reliability, and operational readiness before progression to subsequent training phases.",
+          "Guardrails and evals target unsafe behavior and misinformation, with continuous checks for fabricated security claims.",
         ],
       },
       {
         title: "Vision",
         paragraphs: [
-          "Aeitron's long-term vision is to establish a sovereign AI foundation capable of supporting advanced cybersecurity intelligence, autonomous software engineering, large-scale reasoning systems, and next-generation agentic workflows.",
-          "The project represents an effort to combine AI research, systems engineering, security principles, and production infrastructure into a unified platform built for reliability, scalability, and long-term innovation.",
+          "Long-term: a sovereign foundation for defensive cybersecurity intelligence, agentic software engineering, and reliable reasoning systems.",
         ],
       },
     ],
+    architecture: {
+      title: "Training control plane",
+      nodes: [
+        { id: "data", label: "Data + mix" },
+        { id: "train", label: "Distributed train" },
+        { id: "eval", label: "Eval gates" },
+        { id: "ckpt", label: "Checkpoints" },
+        { id: "promote", label: "Promote" },
+      ],
+      edges: [
+        { from: "data", to: "train" },
+        { from: "train", to: "eval" },
+        { from: "eval", to: "ckpt" },
+        { from: "ckpt", to: "promote" },
+      ],
+    },
     tags: [
       "PyTorch",
       "FSDP",
       "DeepSpeed",
       "PostgreSQL",
       "Redis",
-      "S3/MinIO",
       "Kubernetes",
       "FastAPI",
       "CUDA",
       "Cybersecurity",
       "LLM",
-      "Agentic Coding",
     ],
     links: {
       github: "https://github.com/mah5472651",
+      writeup: "/blog/lora-recipes-that-transfer",
     },
+    access: "case-study",
     featured: true,
   },
   {
@@ -225,47 +238,175 @@ export const projects: Project[] = [
     title: "Aeitron AI Finance Dashboard",
     year: "Present",
     summary:
-      "Unified Agency OS for finance, invoicing, CRM, and team tools with an AI copilot.",
+      "Unified Agency OS for finance, invoicing, CRM, and team tools with an AI copilot on operational data.",
     description:
-      "A comprehensive Unified Agency OS for finance tracking, automated invoicing, CRM, and team management — with an AI business assistant for real-time operational analytics and automated pipeline tracking for real estate leads.",
+      "A Unified Agency OS that consolidates finance tracking, automated invoicing, CRM, and team management — with an AI assistant grounded in the same operational data operators already trust.",
+    metrics: [
+      { label: "Surfaces", value: "Finance · CRM · Team" },
+      { label: "Copilot", value: "Ops analytics" },
+      { label: "Frontend", value: "React + Vite" },
+      { label: "Domain", value: "Real estate ops" },
+    ],
     impact: [
-      "Unified Agency OS: Engineered a comprehensive enterprise dashboard unifying finance tracking, automated invoicing, CRM, and team management tools.",
-      "AI Copilot & Real-Time Analytics: Integrated an AI business assistant providing real-time operational analytics and automated pipeline tracking for real estate leads.",
-      "Premium Frontend Stack: Developed a highly responsive, minimalist, and scalable UI from scratch using React, Vite, TypeScript, and Tailwind CSS.",
+      "Unified finance, invoicing, CRM, and team tools into one operator surface.",
+      "AI copilot for real-time operational analytics and real-estate lead pipeline tracking.",
+      "Responsive TypeScript UI built with React, Vite, and Tailwind — modular for new agency tools.",
     ],
     sections: [
       {
         title: "Unified Agency OS",
         paragraphs: [
-          "One surface for operators: finance tracking, automated invoicing, CRM, and team management — designed for high-ticket agency workflows, especially real estate.",
-          "The product goal is fewer tools and clearer state: what money moved, which leads are hot, and who owns the next action.",
+          "One surface for money movement, hot leads, and ownership of next actions — fewer tools, clearer state.",
         ],
       },
       {
-        title: "AI copilot & analytics",
+        title: "AI copilot on trusted data",
         paragraphs: [
-          "An AI business assistant surfaces operational analytics in real time and helps track pipeline movement for real estate leads.",
-          "Copilot flows sit on top of the same operational data the dashboard already trusts — not a disconnected chat demo.",
-        ],
-      },
-      {
-        title: "Frontend architecture",
-        paragraphs: [
-          "Built from scratch with React, Vite, TypeScript, and Tailwind CSS for a minimalist, responsive UI that scales with new modules without layout debt.",
+          "The assistant sits on the same operational records as the dashboard — not a disconnected chat demo.",
         ],
       },
     ],
-    tags: [
-      "React",
-      "Vite",
-      "TypeScript",
-      "Tailwind",
-      "AI Copilot",
-      "Dashboard",
-    ],
+    architecture: {
+      title: "Agency OS data flow",
+      nodes: [
+        { id: "ingest", label: "Ingest" },
+        { id: "store", label: "Ops DB" },
+        { id: "ui", label: "Dashboard" },
+        { id: "copilot", label: "AI copilot" },
+      ],
+      edges: [
+        { from: "ingest", to: "store" },
+        { from: "store", to: "ui" },
+        { from: "store", to: "copilot" },
+        { from: "copilot", to: "ui" },
+      ],
+    },
+    tags: ["React", "Vite", "TypeScript", "Tailwind", "AI Copilot", "Dashboard"],
     links: {
       github: "https://github.com/mah5472651",
     },
+    access: "case-study",
+    featured: true,
+  },
+  {
+    slug: "vectorforge-hybrid-rag",
+    title: "VectorForge — Hybrid RAG Retrieval",
+    year: "2025",
+    summary:
+      "Production hybrid retrieval: BM25 + dense + RRF + cross-encoder re-rank under a fixed latency budget.",
+    description:
+      "VectorForge is a production-oriented RAG retrieval stack: hybrid recall (BM25 + dense), reciprocal rank fusion, cross-encoder re-ranking, and context packing under token budgets — with the metrics needed to improve the right layer.",
+    metrics: [
+      { label: "Retrieval p99", value: "≤ 180ms" },
+      { label: "Hybrid recall", value: "≤ 40ms p99" },
+      { label: "Re-rank", value: "50 → 8 docs" },
+      { label: "Cache", value: "Redis hot paths" },
+    ],
+    impact: [
+      "Hybrid BM25 + dense (pgvector) recall with reciprocal rank fusion.",
+      "Cross-encoder re-rank of fused candidates before context packing.",
+      "Latency budgets enforced per stage (recall, re-rank, total retrieval).",
+      "Hot-query Redis cache and HNSW tuning for stable p99.",
+      "Quality tracked via Recall@k, nDCG, faithfulness, and citation hit rate.",
+    ],
+    sections: [
+      {
+        title: "Why hybrid",
+        paragraphs: [
+          "Dense retrieval handles paraphrase; BM25 still wins on exact IDs, error codes, and rare product names. Production systems need both.",
+        ],
+      },
+      {
+        title: "Measure the right layer",
+        paragraphs: [
+          "Improving embeddings without end-to-end answer faithfulness optimizes the wrong layer. VectorForge reports retrieval and generation metrics separately.",
+        ],
+      },
+    ],
+    architecture: {
+      title: "Retrieval pipeline",
+      nodes: [
+        { id: "q", label: "Query" },
+        { id: "bm25", label: "BM25" },
+        { id: "dense", label: "Dense" },
+        { id: "rrf", label: "RRF" },
+        { id: "rerank", label: "Re-rank" },
+        { id: "pack", label: "Pack" },
+      ],
+      edges: [
+        { from: "q", to: "bm25" },
+        { from: "q", to: "dense" },
+        { from: "bm25", to: "rrf" },
+        { from: "dense", to: "rrf" },
+        { from: "rrf", to: "rerank" },
+        { from: "rerank", to: "pack" },
+      ],
+    },
+    tags: ["RAG", "pgvector", "BM25", "Hybrid search", "Redis", "Python"],
+    links: {
+      github: "https://github.com/mah5472651",
+      writeup: "/blog/hybrid-search-that-actually-ships",
+    },
+    access: "case-study",
+    featured: true,
+  },
+  {
+    slug: "agent-release-gates",
+    title: "Agent Release Gates — Eval CI for Agents",
+    year: "2025",
+    summary:
+      "Merge-blocking agent quality gates: task suites, faithfulness, tool correctness, cost budgets, and canary deploys.",
+    description:
+      "A release-gate system that turns agent quality from a vibe-check into merge-blocking CI: offline task suites, faithfulness and tool-correctness scores, latency/cost budgets, plus a traffic canary with automatic rollback.",
+    metrics: [
+      { label: "Suite size", value: "~120 tasks" },
+      { label: "Canary", value: "5% traffic" },
+      { label: "Gates", value: "4 offline metrics" },
+      { label: "Rollback", value: "Auto on drop" },
+    ],
+    impact: [
+      "Fixed offline suite measuring task success, faithfulness, tool correctness, and cost/latency.",
+      "CI asserts scores stay within regression bands vs. baseline before merge.",
+      "5% canary with online ratings and automatic rollback on quality drops.",
+      "Versioned suites (like code) so gold labels never silently rewrite.",
+      "Separated prompt/model vs tool/infra changes in reports for faster root-cause.",
+    ],
+    sections: [
+      {
+        title: "Why gates matter",
+        paragraphs: [
+          "Agent demos look great until a prompt tweak or model upgrade silently drops task completion. Gates make regressions fail the build instead of production.",
+        ],
+      },
+      {
+        title: "Suite design",
+        paragraphs: [
+          "Keep suites small enough for CI, mix difficulty, version gold labels, and isolate flaky tools with mocks where safe.",
+        ],
+      },
+    ],
+    architecture: {
+      title: "Release flow",
+      nodes: [
+        { id: "pr", label: "PR / build" },
+        { id: "offline", label: "Offline suite" },
+        { id: "gate", label: "Score gate" },
+        { id: "canary", label: "Canary 5%" },
+        { id: "prod", label: "Prod" },
+      ],
+      edges: [
+        { from: "pr", to: "offline" },
+        { from: "offline", to: "gate" },
+        { from: "gate", to: "canary" },
+        { from: "canary", to: "prod" },
+      ],
+    },
+    tags: ["Agents", "Evals", "MLOps", "CI", "Canary", "Python"],
+    links: {
+      github: "https://github.com/mah5472651",
+      writeup: "/blog/building-eval-gates-for-agents",
+    },
+    access: "case-study",
     featured: true,
   },
 ];
@@ -281,9 +422,9 @@ export const experience = [
     period: "Present",
     location: "Bangladesh / Remote",
     bullets: [
-      "Serve as COO while building a frontier LLM — aligning research, engineering, and product delivery.",
-      "Drive production-grade AI systems: evaluation, reliability, and the path from prototype to shippable capability.",
-      "Lead cross-functional teams to compete at a global level from Bangladesh.",
+      "Serve as COO while shipping frontier LLM capability — aligning research, engineering, and product delivery.",
+      "Own production path: evaluation, reliability, and promotion criteria from prototype to shippable systems.",
+      "Lead cross-functional teams building competitive AI products from Bangladesh.",
     ],
   },
   {
@@ -292,23 +433,39 @@ export const experience = [
     period: "Present",
     location: "Barishal, Bangladesh / Remote",
     bullets: [
-      "Founded Aeitron AI to engineer multi-agent automation workflows for high-ticket sectors including real estate.",
-      "Specialize in multi-agent orchestration, advanced memory architectures, and high-performance RAG pipelines.",
-      "Own product vision and technical direction for automation systems that operators can trust in production.",
+      "Founded Aeitron AI for multi-agent automation in high-ticket sectors including real estate.",
+      "Specialize in multi-agent orchestration, memory architectures, and high-performance RAG pipelines.",
+      "Own product vision and technical direction for automation operators can trust in production.",
     ],
   },
 ];
 
-export const education = [
+export type EducationItem = {
+  school: string;
+  degree: string;
+  period: string;
+  location?: string;
+  bullets?: string[];
+};
+
+export const education: EducationItem[] = [
   {
-    school: "See resume for full education details",
-    degree: "Download resume.pdf",
-    period: "",
+    school: "Applied AI engineering track",
+    degree: "Production LLMs · Agents · RAG · Distributed training",
+    period: "2022 — Present",
+    location: "Barishal, Bangladesh / Remote",
+    bullets: [
+      "Intensive applied study of multi-agent systems, hybrid retrieval, eval gates, and LLM training infrastructure.",
+      "Learning validated by shipping systems at Craftly and Aeitron AI — not coursework alone.",
+      "Full academic credentials and certifications listed on resume.pdf and LinkedIn.",
+    ],
   },
 ];
 
 export const contact = {
   headline: "Let's build production-grade AI.",
   blurb:
-    "Open to collaborations, partnerships, and high-impact AI systems work. Reach me by email or WhatsApp — I respond as soon as I can.",
+    "Open to collaborations, partnerships, and high-impact AI systems work. Prefer email for first contact; WhatsApp available for quick follow-ups.",
+  /** Prefer email as primary public channel; phone stays in href only when possible */
+  preferEmail: true as const,
 };

@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import Navbar from "@/components/Navbar";
+import AccessBadge from "@/components/AccessBadge";
 import Footer from "@/components/Footer";
+import MetricStrip from "@/components/MetricStrip";
+import Navbar from "@/components/Navbar";
+import ProjectArchitecture from "@/components/ProjectArchitecture";
 import { getProjectBySlug, projects, site } from "@/data/portfolio";
+import { debug } from "@/lib/debug";
 import { buildPageMetadata, projectJsonLd } from "@/lib/seo";
 
 type Props = {
@@ -29,7 +33,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function ProjectPage({ params }: Props) {
   const { slug } = await params;
   const project = getProjectBySlug(slug);
-  if (!project) notFound();
+  if (!project) {
+    debug("project not found", slug);
+    notFound();
+  }
 
   const otherProjects = projects.filter((p) => p.slug !== project.slug);
   const jsonLd = projectJsonLd(project);
@@ -42,7 +49,6 @@ export default async function ProjectPage({ params }: Props) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        {/* Hero */}
         <header className="border-b border-card-border px-4 pb-10 pt-24 sm:px-8 sm:pb-16 sm:pt-28">
           <div className="mx-auto max-w-4xl">
             <Link
@@ -52,9 +58,12 @@ export default async function ProjectPage({ params }: Props) {
               ← all projects
             </Link>
 
-            <p className="mt-4 font-mono text-xs text-accent break-all sm:mt-6">
-              $ cat projects/{project.slug}.md
-            </p>
+            <div className="mt-4 flex flex-wrap items-center gap-2 sm:mt-6">
+              <p className="font-mono text-xs text-accent break-all">
+                $ cat projects/{project.slug}.md
+              </p>
+              <AccessBadge access={project.access} />
+            </div>
             <p className="mt-2 font-mono text-xs text-muted">{project.year}</p>
 
             <h1 className="mt-3 text-2xl font-semibold tracking-tight text-foreground break-words sm:text-4xl lg:text-5xl">
@@ -63,6 +72,8 @@ export default async function ProjectPage({ params }: Props) {
             <p className="mt-4 max-w-3xl text-base leading-relaxed text-muted sm:mt-5 sm:text-xl">
               {project.description}
             </p>
+
+            <MetricStrip metrics={project.metrics} className="mt-8" />
 
             <div className="mt-6 flex flex-wrap gap-1.5">
               {project.tags.map((tag) => (
@@ -94,7 +105,7 @@ export default async function ProjectPage({ params }: Props) {
                     rel="noopener noreferrer"
                     className="inline-flex min-h-11 items-center rounded-lg border border-card-border bg-card px-4 py-2.5 text-foreground transition hover:border-accent/40 hover:text-accent"
                   >
-                    demo ↗
+                    live demo ↗
                   </a>
                 )}
               {project.links.writeup && (
@@ -112,11 +123,27 @@ export default async function ProjectPage({ params }: Props) {
                 discuss this project
               </Link>
             </div>
+
+            {project.access !== "public" && (
+              <p className="mt-4 max-w-2xl font-mono text-[11px] leading-relaxed text-muted">
+                Source is not fully public. This case study documents architecture,
+                metrics, and outcomes; request a private walkthrough via contact.
+              </p>
+            )}
           </div>
         </header>
 
         <article className="px-4 py-10 sm:px-8 sm:py-20">
           <div className="mx-auto max-w-4xl space-y-10 sm:space-y-14">
+            {project.architecture && (
+              <section>
+                <h2 className="mb-5 font-mono text-sm text-accent">
+                  $ render architecture.dot
+                </h2>
+                <ProjectArchitecture architecture={project.architecture} />
+              </section>
+            )}
+
             <section>
               <h2 className="mb-5 font-mono text-sm text-accent">
                 $ cat highlights.log
@@ -125,7 +152,7 @@ export default async function ProjectPage({ params }: Props) {
                 {project.impact.map((item, i) => (
                   <li
                     key={item}
-                    className="flex gap-3 rounded-xl border border-card-border bg-card/50 p-4 text-sm leading-relaxed text-muted sm:p-5 sm:text-base"
+                    className="card-lift flex gap-3 rounded-xl border border-card-border bg-card/50 p-4 text-sm leading-relaxed text-muted sm:p-5 sm:text-base"
                   >
                     <span className="shrink-0 font-mono text-xs text-accent">
                       {String(i + 1).padStart(2, "0")}
@@ -170,7 +197,7 @@ export default async function ProjectPage({ params }: Props) {
                 {project.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="rounded-lg border border-card-border bg-background/80 px-3 py-1.5 font-mono text-xs text-foreground/90"
+                    className="chip-pop rounded-lg border border-card-border bg-background/80 px-3 py-1.5 font-mono text-xs text-foreground/90"
                   >
                     {tag}
                   </span>
@@ -191,7 +218,7 @@ export default async function ProjectPage({ params }: Props) {
               <div className="mt-6 flex flex-wrap gap-3 font-mono text-sm">
                 <Link
                   href="/#contact"
-                  className="inline-flex min-h-11 items-center rounded-lg bg-accent px-5 py-2.5 font-medium text-background transition hover:brightness-110"
+                  className="btn-glow inline-flex min-h-11 items-center rounded-lg bg-accent px-5 py-2.5 font-medium text-background"
                 >
                   get in touch
                 </Link>
@@ -214,7 +241,7 @@ export default async function ProjectPage({ params }: Props) {
                     <li key={p.slug}>
                       <Link
                         href={`/projects/${p.slug}`}
-                        className="group block rounded-xl border border-card-border bg-card/40 p-4 transition hover:border-accent/35"
+                        className="card-lift group block rounded-xl border border-card-border bg-card/40 p-4"
                       >
                         <p className="font-mono text-[10px] text-muted">
                           {p.year}

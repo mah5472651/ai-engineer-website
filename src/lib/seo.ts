@@ -66,11 +66,13 @@ export function buildPageMetadata({
       siteName: `${site.name} · ${site.role}`,
       locale: "en_US",
       type,
+      // Images come from app/opengraph-image.tsx (Next file convention)
     },
     twitter: {
       card: "summary_large_image",
       title: displayTitle,
       description,
+      // Images come from app/twitter-image.tsx
     },
   };
 }

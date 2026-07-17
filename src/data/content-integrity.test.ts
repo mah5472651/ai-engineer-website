@@ -45,6 +45,10 @@ describe("resume generator integrity", () => {
       );
     }
   });
+
+  it("includes an Education section in the resume generator", () => {
+    expect(resumeScript).toMatch(/sectionTitle\(doc,\s*["']Education["']\)/);
+  });
 });
 
 describe("public resume.pdf", () => {
