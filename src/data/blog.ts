@@ -201,10 +201,25 @@ export function getPostBySlug(slug: string): BlogPost | undefined {
   return posts.find((p) => p.slug === slug);
 }
 
+/** Formats a calendar date as `Mon D, YYYY` in a timezone-stable way (UTC). */
 export function formatPostDate(date: string): string {
-  return new Date(date + "T00:00:00").toLocaleDateString("en-US", {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+    throw new Error(`Invalid post date "${date}"; expected YYYY-MM-DD`);
+  }
+  const [year, month, day] = date.split("-").map(Number);
+  // Construct via UTC so SSR (often UTC) and clients render the same calendar day.
+  const utc = new Date(Date.UTC(year, month - 1, day));
+  if (
+    utc.getUTCFullYear() !== year ||
+    utc.getUTCMonth() !== month - 1 ||
+    utc.getUTCDate() !== day
+  ) {
+    throw new Error(`Invalid calendar date "${date}"`);
+  }
+  return utc.toLocaleDateString("en-US", {
     year: "numeric",
     month: "short",
     day: "numeric",
+    timeZone: "UTC",
   });
 }

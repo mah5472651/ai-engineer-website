@@ -7,6 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "generate:resume": "node scripts/generate-resume.mjs"
   },
   "dependencies": {
@@ -26,6 +28,7 @@
     "eslint-config-next": "16.2.10",
     "pdfkit": "^0.19.1",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^4.1.10"
   }
 }

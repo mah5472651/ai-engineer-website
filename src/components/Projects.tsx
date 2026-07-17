@@ -12,7 +12,7 @@ export default function Projects() {
         <SectionHeading
           command="find ./projects -type f"
           title="Selected projects"
-          subtitle="Production systems with concrete metrics — not just demos."
+          subtitle="Production systems and product work — not just demos."
         />
 
         <div className="grid gap-4 lg:grid-cols-2">

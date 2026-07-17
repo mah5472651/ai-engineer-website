@@ -86,7 +86,10 @@ export default function Contact() {
                   <span className="text-muted"> = </span>
                   <span className="text-foreground">{site.location}</span>
                 </li>
-                {Object.entries(site.social).map(([key, url]) => (
+                {Object.entries(site.social)
+                  // WhatsApp is listed above via site.whatsapp; avoid a duplicate row.
+                  .filter(([key]) => key !== "whatsapp")
+                  .map(([key, url]) => (
                   <li key={key}>
                     <span className="text-accent-2">{key}</span>
                     <span className="text-muted"> = </span>

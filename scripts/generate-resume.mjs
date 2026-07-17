@@ -1,5 +1,6 @@
 /**
  * Generates public/resume.pdf from portfolio content.
+ * Keep in sync with src/data/portfolio.ts (tested by content-integrity tests).
  * Run: node scripts/generate-resume.mjs
  */
 import PDFDocument from "pdfkit";
@@ -10,91 +11,65 @@ import { fileURLToPath } from "url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const outPath = path.join(__dirname, "..", "public", "resume.pdf");
 
+// Must match src/data/portfolio.ts — regenerate after portfolio content changes.
 const site = {
-  name: "Alex Rivera",
+  name: "Mahmud Hasan",
   role: "AI Engineer",
-  email: "alex.rivera@example.com",
-  location: "San Francisco, CA",
-  github: "github.com/alexrivera",
-  linkedin: "linkedin.com/in/alexrivera",
+  email: "mah5472651@gmail.com",
+  location: "Barishal, Bangladesh",
+  github: "github.com/mah5472651",
+  linkedin: "linkedin.com/in/mahmudhasan-ai-engineer/",
+  whatsapp: "+8801606587403",
 };
 
 const summary =
-  "AI engineer specializing in production ML systems: LLM platforms, RAG, agents, fine-tuning, and MLOps. Focused on reliable inference, rigorous evaluation, and measurable product impact.";
+  "High-growth AI Engineer bridging advanced research and production-grade AI systems. COO of Craftly (building a frontier LLM) and Founder & CEO at Aeitron AI (multi-agent automation for high-ticket sectors). Specialized in multi-agent orchestration, advanced memory architectures, cybersecurity intelligence, and high-performance RAG pipelines.";
 
 const experience = [
   {
-    company: "Nova Labs",
-    role: "Senior AI Engineer",
-    period: "2023 — Present",
-    location: "San Francisco, CA",
+    company: "Craftly",
+    role: "COO · AI Engineer",
+    period: "Present",
+    location: "Bangladesh / Remote",
     bullets: [
-      "Lead LLM platform (RAG, agents, evals) powering core features for 50k+ users.",
-      "Designed multi-tenant hybrid retrieval; improved answer faithfulness by 22%.",
-      "Mentored 3 engineers; established model review and canary deployment practices.",
+      "Serve as COO while building a frontier LLM — aligning research, engineering, and product delivery.",
+      "Drive production-grade AI systems: evaluation, reliability, and the path from prototype to shippable capability.",
+      "Lead cross-functional teams to compete at a global level from Bangladesh.",
     ],
   },
   {
-    company: "Horizon AI",
-    role: "Machine Learning Engineer",
-    period: "2021 — 2023",
-    location: "Remote",
+    company: "Aeitron AI",
+    role: "Founder & CEO",
+    period: "Present",
+    location: "Barishal, Bangladesh / Remote",
     bullets: [
-      "Shipped vision + NLP document understanding; reduced manual review by 60%.",
-      "Built K8s training pipelines with experiment tracking and regression tests.",
-      "Defined offline/online evaluation loops with product partners.",
-    ],
-  },
-  {
-    company: "DataPulse",
-    role: "ML Engineer",
-    period: "2019 — 2021",
-    location: "New York, NY",
-    bullets: [
-      "Productionized ranking and recommendation models for high-throughput APIs.",
-      "Owned feature pipelines and monitoring for drift and latency SLOs.",
+      "Founded Aeitron AI to engineer multi-agent automation workflows for high-ticket sectors including real estate.",
+      "Specialize in multi-agent orchestration, advanced memory architectures, and high-performance RAG pipelines.",
+      "Own product vision and technical direction for automation systems that operators can trust in production.",
     ],
   },
 ];
 
 const projects = [
   {
-    title: "Aether — Multi-agent research system",
-    line: "Agents with tools, memory, and eval gates; ~70% faster literature review.",
+    title: "Aeitron — Scratch-Trained Cybersecurity & Agentic Coding LLM",
+    line: "From-scratch cybersecurity LLM: training control plane, defensive data mixing, FSDP/DeepSpeed workspace, and gated 1k→1M qualification.",
   },
   {
-    title: "VectorForge — Production RAG",
-    line: "Hybrid search + re-rank; 2M+ queries/mo at p99 < 180ms retrieval.",
-  },
-  {
-    title: "SignalNet — Anomaly detection",
-    line: "Streaming ML for infra metrics; 40% fewer false-positive pages.",
-  },
-  {
-    title: "TuneKit — LoRA toolkit",
-    line: "Shared fine-tuning CLI/evals adopted by 5 product teams.",
+    title: "Aeitron AI Finance Dashboard",
+    line: "Unified Agency OS for finance, invoicing, CRM, and team tools with an AI copilot for real estate lead analytics.",
   },
 ];
 
 const skills = {
-  "ML & LLMs":
-    "PyTorch, Transformers, LoRA/PEFT, RLHF/DPO, RAG, Agents, vLLM, eval harnesses",
-  "MLOps": "Kubernetes, Docker, MLflow/W&B, CI/CD for models, GPU optimization",
-  Software: "Python, TypeScript, FastAPI, PostgreSQL, Redis, AWS/GCP",
+  "AI Systems":
+    "Multi-agent orchestration, advanced memory, high-performance RAG, LLM productization, cybersecurity intelligence",
+  "ML & Deep Learning":
+    "PyTorch, Transformers, Fine-tuning / LoRA, NLP, Evaluation & evals, Prompt systems",
+  "LLM Stack":
+    "RAG pipelines, Agents & tools, Vector search, LangChain / LangGraph, vLLM / inference",
+  Software: "Python, TypeScript, FastAPI, PostgreSQL, Team leadership, Product & ops (COO/CEO)",
 };
-
-const education = [
-  {
-    school: "Carnegie Mellon University",
-    degree: "M.S. Machine Learning",
-    period: "2017 — 2019",
-  },
-  {
-    school: "University of California, Berkeley",
-    degree: "B.S. Computer Science",
-    period: "2013 — 2017",
-  },
-];
 
 const colors = {
   text: "#0f172a",
@@ -213,23 +188,13 @@ for (const [label, value] of Object.entries(skills)) {
   doc.moveDown(0.15);
 }
 
-// Education
-sectionTitle(doc, "Education");
-for (const ed of education) {
-  doc
-    .font("Helvetica-Bold")
-    .fontSize(10)
-    .fillColor(colors.text)
-    .text(ed.school, { continued: true })
-    .font("Helvetica")
-    .fillColor(colors.muted)
-    .text(`  ·  ${ed.period}`);
-  doc.fontSize(9.5).text(ed.degree);
-  doc.moveDown(0.25);
-}
-
 doc.end();
 
 stream.on("finish", () => {
   console.log(`Wrote ${outPath}`);
+});
+
+stream.on("error", (err) => {
+  console.error("Failed to write resume PDF:", err);
+  process.exitCode = 1;
 });

@@ -10,7 +10,7 @@ export const site = {
   email: "mah5472651@gmail.com",
   /** Opens the device/browser mail app with this address filled in */
   get emailHref() {
-    return `mailto:mah5472651@gmail.com?subject=${encodeURIComponent("Hello Mahmud Hasan")}`;
+    return `mailto:${this.email}?subject=${encodeURIComponent(`Hello ${this.name}`)}`;
   },
   location: "Barishal, Bangladesh",
   resumeUrl: "/resume.pdf",
@@ -106,24 +106,29 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    slug: "aeitron-agentic-ai-architecture",
-    title: "Aeitron (Agentic AI Architecture)",
+    slug: "aeitron-cybersecurity-agentic-coding-llm",
+    title: "Aeitron — Scratch-Trained Cybersecurity & Agentic Coding LLM",
     year: "Present",
     summary:
-      "Frontier AI architecture for autonomous agentic coding and core cybersecurity operations — deep reasoning, persistent memory, and tool execution.",
+      "From-scratch cybersecurity LLM with a full training control plane, curriculum-first defensive data mixing, and a distributed training workspace for gated qualification and promotion.",
     description:
-      "Aeitron is an advanced agentic AI architecture engineered for autonomous software creation and cyber defense intelligence. The system integrates deep reasoning, persistent memory structures, and tool execution so agents can operate with autonomy on complex engineering and security workflows.",
+      "Designed and built a full training control plane for a from-scratch cybersecurity and agentic coding LLM. The system covers tokenizer and data pipelines, evaluation harnesses, a gated qualification staircase (1k→1M step milestones) with checkpoint reload-verification and regression gates before promotion, curriculum-first defensive-only data mixing with hallucination guardrails, and a distributed training workspace with production readiness contracts.",
     impact: [
-      "Frontier AI Architecture: Architecting advanced systems engineered specifically for autonomous agentic coding and core cybersecurity operations.",
-      "Autonomous Software Creation: Enabling self-directed software development by integrating deep reasoning, persistent memory structures, and tool execution.",
-      "Cyber Defense Intelligence: Developing highly specialized AI capabilities focused on threat detection, vulnerability analysis, and security intelligence.",
+      "Designed and built a full training control plane for a from-scratch cybersecurity LLM, including tokenizer/data pipelines, evaluation harnesses, and a gated qualification staircase (1k→1M step milestones) requiring checkpoint reload-verification and regression gates before promotion.",
+      "Built a curriculum-first defensive-only data mixing system that filters offensive misuse patterns and enforces hallucination guardrails (no fabricated CVEs, no unverified test-pass claims).",
+      "Implemented a distributed training workspace with Postgres-backed job state machine, FSDP/DeepSpeed/Megatron scheduler adapters, and production readiness contracts distinguishing proven vs. cluster-unproven components.",
     ],
     tags: [
-      "Agentic AI",
-      "Architecture",
-      "Autonomous coding",
+      "PyTorch",
+      "FSDP/DeepSpeed",
+      "Postgres",
+      "Redis",
+      "S3/MinIO",
+      "Kubernetes",
+      "FastAPI",
+      "CUDA",
       "Cybersecurity",
-      "Memory",
+      "LLM",
     ],
     links: {
       github: "https://github.com/mah5472651",
