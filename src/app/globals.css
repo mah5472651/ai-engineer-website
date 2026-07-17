@@ -111,6 +111,12 @@ body {
     0 0 32px -8px var(--accent-dim);
 }
 
+/* Hero LIVE pill — stable, no layout shift from ping */
+.hero-status {
+  box-shadow: 0 0 20px -8px var(--accent-dim);
+  backdrop-filter: blur(8px);
+}
+
 .terminal-cursor::after {
   content: "▋";
   margin-left: 2px;
