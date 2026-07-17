@@ -33,13 +33,11 @@ export const site = {
 
 export const about = {
   paragraphs: [
-    "AI engineer focused on systems that survive contact with production: evaluation gates, retrieval quality, agent reliability, and training control planes — not demos that only work in a notebook.",
-    "Concurrently COO at Craftly (frontier LLM productization) and Founder & CEO at Aeitron AI (multi-agent automation for high-ticket operations, including real estate).",
-    "Based in Barishal, Bangladesh; building globally competitive AI systems with cross-functional engineering teams.",
+    "High growth AI Engineer and Operator bridging the gap between advanced research and production-grade AI systems. Serving concurrently as the COO of Craftly (building a frontier LLM) and Founder & CEO at Aeitron (engineering multi agent automation workflows for high-ticket sectors like real estate). Specialized in multi agent orchestration, advanced memory architectures, cybersecurity intelligence, and high performance RAG pipelines. Proven track record of leading cross-functional engineering teams to build globally competitive AI technology from Bangladesh.",
   ],
   highlights: [
     { label: "Roles", value: "COO + CEO" },
-    { label: "Focus", value: "Agents · RAG" },
+    { label: "Focus", value: "Agentic AI + LLM" },
     { label: "Based in", value: "Bangladesh" },
     { label: "Shipped focus", value: "Evals · Infra" },
   ],

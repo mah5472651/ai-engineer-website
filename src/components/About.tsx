@@ -12,21 +12,27 @@ export default function About() {
           subtitle={`${site.role} · ${site.location}`}
         />
 
-        <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr]">
-          <Reveal variant="left" className="space-y-4 text-base leading-relaxed text-muted sm:text-lg">
+        <div className="grid items-start gap-8 lg:grid-cols-[1.45fr_1fr] lg:gap-10">
+          <Reveal
+            variant="up"
+            className="space-y-4 text-base leading-relaxed text-muted sm:text-lg"
+          >
             {about.paragraphs.map((p, i) => (
               <p key={i}>{p}</p>
             ))}
           </Reveal>
 
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
+          {/* Keep highlight cards top-aligned with the about copy (2×2) */}
+          <div className="grid grid-cols-2 gap-3 self-start">
             {about.highlights.map((h, i) => (
-              <Reveal key={h.label} delay={i * 80} variant="scale">
-                <div className="card-lift rounded-xl border border-card-border bg-card/80 p-5">
-                  <p className="font-mono text-2xl font-semibold text-accent sm:text-3xl">
+              <Reveal key={h.label} delay={i * 60} variant="up" className="h-full">
+                <div className="card-lift flex h-full min-h-[6.5rem] flex-col justify-center rounded-xl border border-card-border bg-card/80 p-4 sm:min-h-[7rem] sm:p-5">
+                  <p className="font-mono text-base font-semibold leading-snug text-accent sm:text-lg lg:text-xl">
                     {h.value}
                   </p>
-                  <p className="mt-1 font-mono text-xs text-muted">{h.label}</p>
+                  <p className="mt-1.5 font-mono text-[11px] text-muted sm:text-xs">
+                    {h.label}
+                  </p>
                 </div>
               </Reveal>
             ))}
