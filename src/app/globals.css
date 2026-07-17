@@ -226,10 +226,8 @@ body {
 .reveal {
   opacity: 0;
   transition:
-    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-    filter 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: opacity, transform;
+    opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .reveal-up {
@@ -254,7 +252,6 @@ body {
 .reveal.is-visible {
   opacity: 1;
   transform: none;
-  filter: none;
 }
 
 /* Interactive cards */
@@ -309,13 +306,19 @@ body {
   transform: translateY(0);
 }
 
-/* Soft ambient orbs in hero */
+/* Soft ambient orbs in hero — desktop only to cut mobile paint cost */
 .hero-orb {
-  animation: float-soft 8s ease-in-out infinite, glow-pulse 5s ease-in-out infinite;
+  opacity: 0.9;
 }
 
-.hero-orb-delay {
-  animation-delay: 1.2s, 0.6s;
+@media (prefers-reduced-motion: no-preference) and (min-width: 768px) {
+  .hero-orb {
+    animation: float-soft 8s ease-in-out infinite, glow-pulse 5s ease-in-out infinite;
+  }
+
+  .hero-orb-delay {
+    animation-delay: 1.2s, 0.6s;
+  }
 }
 
 /* Terminal code block entrance */
@@ -372,14 +375,14 @@ button:focus:not(:focus-visible) {
   outline: none;
 }
 
-/* ── AI ambient backdrop (NeuralBackdrop) ── */
+/* ── AI ambient backdrop (NeuralBackdrop) — cheap, static-first ── */
 .neural-orb {
   position: absolute;
   border-radius: 9999px;
-  filter: blur(64px);
-  opacity: 0.45;
-  will-change: transform, opacity;
-  animation: neural-drift 18s ease-in-out infinite;
+  /* pre-blurred soft gradients — no continuous filter:blur() paint */
+  opacity: 0.5;
+  contain: strict;
+  transform: translateZ(0);
 }
 
 .neural-orb-a {
@@ -387,7 +390,7 @@ button:focus:not(:focus-visible) {
   left: 15%;
   width: min(42vw, 28rem);
   height: min(42vw, 28rem);
-  background: radial-gradient(circle, #00e5a828 0%, transparent 70%);
+  background: radial-gradient(circle, #00e5a830 0%, transparent 68%);
 }
 
 .neural-orb-b {
@@ -395,9 +398,7 @@ button:focus:not(:focus-visible) {
   right: -5%;
   width: min(36vw, 22rem);
   height: min(36vw, 22rem);
-  background: radial-gradient(circle, #38bdf822 0%, transparent 70%);
-  animation-delay: -6s;
-  animation-duration: 22s;
+  background: radial-gradient(circle, #38bdf824 0%, transparent 68%);
 }
 
 .neural-orb-c {
@@ -405,34 +406,54 @@ button:focus:not(:focus-visible) {
   left: 30%;
   width: min(40vw, 24rem);
   height: min(40vw, 24rem);
-  background: radial-gradient(circle, #00e5a814 0%, transparent 70%);
-  animation-delay: -11s;
-  animation-duration: 26s;
+  background: radial-gradient(circle, #00e5a818 0%, transparent 68%);
 }
 
+/* Disable scanline + heavy motion by default; only enable on fine pointer + no reduce */
 .neural-scanline {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    180deg,
-    transparent 0%,
-    #00e5a806 50%,
-    transparent 100%
-  );
-  background-size: 100% 220%;
-  animation: neural-scan 14s linear infinite;
-  opacity: 0.35;
-  mix-blend-mode: screen;
+  display: none;
+}
+
+@media (prefers-reduced-motion: no-preference) and (min-width: 768px) {
+  .neural-orb {
+    animation: neural-drift 24s ease-in-out infinite;
+  }
+
+  .neural-orb-b {
+    animation-delay: -8s;
+    animation-duration: 28s;
+  }
+
+  .neural-orb-c {
+    animation-delay: -14s;
+    animation-duration: 32s;
+  }
+
+  .neural-scanline {
+    display: block;
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      #00e5a805 50%,
+      transparent 100%
+    );
+    background-size: 100% 220%;
+    animation: neural-scan 18s linear infinite;
+    opacity: 0.28;
+    pointer-events: none;
+  }
 }
 
 @keyframes neural-drift {
   0%,
   100% {
     transform: translate3d(0, 0, 0) scale(1);
-    opacity: 0.35;
+    opacity: 0.4;
   }
   50% {
-    transform: translate3d(2%, -3%, 0) scale(1.08);
+    transform: translate3d(1.5%, -2%, 0) scale(1.04);
     opacity: 0.55;
   }
 }
@@ -444,6 +465,12 @@ button:focus:not(:focus-visible) {
   100% {
     background-position: 0% 100%;
   }
+}
+
+/* Below-fold sections paint less until near viewport */
+section:not(#top) {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 480px;
 }
 
 /* Architecture diagram entrance */

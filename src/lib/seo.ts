@@ -139,27 +139,3 @@ export function projectJsonLd(project: {
   };
 }
 
-export function blogPostingJsonLd(post: {
-  title: string;
-  description: string;
-  slug: string;
-  date: string;
-  tags: string[];
-}) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    headline: post.title,
-    description: post.description,
-    datePublished: post.date,
-    dateModified: post.date,
-    url: absoluteUrl(`/blog/${post.slug}`),
-    author: {
-      "@type": "Person",
-      name: site.name,
-      url: getSiteUrl(),
-    },
-    keywords: post.tags.join(", "),
-    mainEntityOfPage: absoluteUrl(`/blog/${post.slug}`),
-  };
-}

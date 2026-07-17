@@ -6,7 +6,6 @@ Includes:
 
 - Full portfolio (hero, about, skills, projects, experience, education, contact)
 - Project case studies with metrics + architecture diagrams (`/projects/[slug]`)
-- Blog listing + posts (`/blog`, `/blog/[slug]`)
 - Dynamic Open Graph / Twitter images
 - Ambient AI animations (respects `prefers-reduced-motion`)
 - Downloadable resume (`public/resume.pdf`)
@@ -24,8 +23,7 @@ Open [http://localhost:3000](http://localhost:3000).
 
 | File | What to edit |
 | --- | --- |
-| `src/data/portfolio.ts` | Name, about, skills, projects, experience, contact |
-| `src/data/blog.ts` | Blog posts (Markdown bodies) |
+| `src/data/portfolio.ts` | Name, about, skills, projects, experience, education, contact |
 | `scripts/generate-resume.mjs` | Resume PDF content (then regenerate) |
 
 ```bash
@@ -66,6 +64,5 @@ SEO includes: `sitemap.xml`, `robots.txt`, canonical URLs, Open Graph / Twitter 
 - Next.js (App Router)
 - TypeScript
 - Tailwind CSS v4
-- react-markdown
 - pdfkit (resume generation)
 - Vitest (content integrity)

@@ -11,8 +11,6 @@ const sectionLinks = [
   { href: "/#skills", label: "skills" },
   { href: "/#projects", label: "projects" },
   { href: "/#experience", label: "experience" },
-  { href: "/#education", label: "education" },
-  { href: "/blog", label: "blog" },
   { href: "/#contact", label: "contact" },
 ];
 
@@ -21,8 +19,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const menuId = useId();
-  const onInnerPage =
-    pathname?.startsWith("/blog") || pathname?.startsWith("/projects");
+  const onInnerPage = pathname?.startsWith("/projects");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -30,10 +27,6 @@ export default function Navbar() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
 
   useEffect(() => {
     if (!open) return;
@@ -74,9 +67,7 @@ export default function Navbar() {
         <ul className="hidden items-center gap-0.5 md:flex lg:gap-1">
           {sectionLinks.map((link) => {
             const active =
-              (link.href === "/blog" && pathname?.startsWith("/blog")) ||
-              (link.href === "/#projects" &&
-                pathname?.startsWith("/projects"));
+              link.href === "/#projects" && pathname?.startsWith("/projects");
             return (
               <li key={link.href}>
                 <Link

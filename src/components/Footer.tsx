@@ -18,8 +18,8 @@ export default function Footer() {
           <Link href="/#projects" className="min-h-11 inline-flex items-center transition hover:text-accent">
             projects
           </Link>
-          <Link href="/blog" className="min-h-11 inline-flex items-center transition hover:text-accent">
-            blog
+          <Link href="/#experience" className="min-h-11 inline-flex items-center transition hover:text-accent">
+            experience
           </Link>
           <Link href="/#contact" className="min-h-11 inline-flex items-center transition hover:text-accent">
             contact

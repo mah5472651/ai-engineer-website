@@ -1,7 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
   absoluteUrl,
-  blogPostingJsonLd,
   buildPageMetadata,
   personJsonLd,
   projectJsonLd,
@@ -20,7 +19,7 @@ describe("getSiteUrl", () => {
 
 describe("absoluteUrl", () => {
   it("joins path to site origin", () => {
-    expect(absoluteUrl("/blog")).toBe(`${getSiteUrl()}/blog`);
+    expect(absoluteUrl("/projects")).toBe(`${getSiteUrl()}/projects`);
     expect(absoluteUrl("/")).toBe(getSiteUrl());
   });
 });
@@ -28,13 +27,13 @@ describe("absoluteUrl", () => {
 describe("buildPageMetadata", () => {
   it("sets canonical and open graph fields", () => {
     const meta = buildPageMetadata({
-      title: "Blog",
+      title: "Projects",
       description: "Test description for SEO.",
-      path: "/blog",
+      path: "/projects/test",
     });
     expect(meta.description).toBe("Test description for SEO.");
-    expect(meta.alternates?.canonical).toBe(`${getSiteUrl()}/blog`);
-    expect(meta.openGraph?.url).toBe(`${getSiteUrl()}/blog`);
+    expect(meta.alternates?.canonical).toBe(`${getSiteUrl()}/projects/test`);
+    expect(meta.openGraph?.url).toBe(`${getSiteUrl()}/projects/test`);
   });
 
   it("supports absolute home title", () => {
@@ -56,7 +55,7 @@ describe("JSON-LD builders", () => {
     expect(web["@type"]).toBe("WebSite");
   });
 
-  it("builds project and blog schemas", () => {
+  it("builds project schema", () => {
     const project = projectJsonLd({
       title: "Test",
       description: "Desc",
@@ -64,15 +63,7 @@ describe("JSON-LD builders", () => {
       slug: "test",
       tags: ["AI"],
     });
-    const post = blogPostingJsonLd({
-      title: "Post",
-      description: "About",
-      slug: "post",
-      date: "2025-01-01",
-      tags: ["RAG"],
-    });
     expect(project["@type"]).toBe("CreativeWork");
-    expect(post["@type"]).toBe("BlogPosting");
-    expect(post.datePublished).toBe("2025-01-01");
+    expect(project.url).toBe(`${getSiteUrl()}/projects/test`);
   });
 });

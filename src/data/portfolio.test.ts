@@ -111,7 +111,7 @@ describe("experience, education & skills", () => {
   });
 
   it("has real education entries (not PDF-only placeholders)", () => {
-    expect(education.length).toBeGreaterThan(0);
+    expect(education.length).toBeGreaterThanOrEqual(2);
     for (const ed of education) {
       expect(ed.school.trim().length).toBeGreaterThan(0);
       expect(ed.degree.trim().length).toBeGreaterThan(0);
@@ -119,6 +119,9 @@ describe("experience, education & skills", () => {
       expect(ed.school).not.toMatch(/see resume/i);
       expect(ed.degree).not.toMatch(/download resume/i);
     }
+    const degrees = education.map((e) => e.degree);
+    expect(degrees.some((d) => /HSC/i.test(d))).toBe(true);
+    expect(degrees.some((d) => /SSC/i.test(d))).toBe(true);
   });
 
   it("groups skills into non-empty categories", () => {

@@ -26,16 +26,16 @@ export default function NotFound() {
             go home
           </Link>
           <Link
-            href="/blog"
-            className="rounded-lg border border-card-border bg-card px-5 py-2.5 font-mono text-sm text-foreground transition hover:border-accent/40 hover:text-accent"
-          >
-            blog
-          </Link>
-          <Link
             href="/#projects"
             className="rounded-lg border border-card-border bg-card px-5 py-2.5 font-mono text-sm text-foreground transition hover:border-accent/40 hover:text-accent"
           >
             projects
+          </Link>
+          <Link
+            href="/#contact"
+            className="rounded-lg border border-card-border bg-card px-5 py-2.5 font-mono text-sm text-foreground transition hover:border-accent/40 hover:text-accent"
+          >
+            contact
           </Link>
         </div>
       </main>

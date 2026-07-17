@@ -52,10 +52,16 @@ const experience = [
 
 const education = [
   {
-    school: "Applied AI engineering track",
-    degree: "Production LLMs · Agents · RAG · Distributed training",
-    period: "2022 — Present",
-    location: "Barishal, Bangladesh / Remote",
+    school: "Govt BM College",
+    degree: "Higher Secondary Certificate (HSC) · Science Group",
+    period: "Expected Completion: 2028 · Expected GPA: 5.00",
+    location: "Barishal, Bangladesh",
+  },
+  {
+    school: "Baghia Al-Amin Kamil Madrasah",
+    degree: "Secondary School Certificate (SSC) · Science Group",
+    period: "Completed: 2026 · GPA: 5.00",
+    location: "Barishal, Bangladesh",
   },
 ];
 

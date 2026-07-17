@@ -7,8 +7,8 @@ import {
   useEffect,
   useRef,
   useState,
+  useSyncExternalStore,
 } from "react";
-import { debug } from "@/lib/debug";
 
 type Variant = "up" | "down" | "left" | "right" | "scale" | "fade";
 
@@ -25,6 +25,20 @@ type Props = {
   style?: CSSProperties;
 };
 
+function subscribeReducedMotion(onChange: () => void) {
+  const mql = window.matchMedia("(prefers-reduced-motion: reduce)");
+  mql.addEventListener("change", onChange);
+  return () => mql.removeEventListener("change", onChange);
+}
+
+function getReducedMotionSnapshot() {
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
+function getReducedMotionServerSnapshot() {
+  return false;
+}
+
 /**
  * Scroll-triggered reveal. Pure CSS transforms + IntersectionObserver.
  * Respects prefers-reduced-motion.
@@ -40,42 +54,41 @@ export default function Reveal({
   style,
 }: Props) {
   const ref = useRef<HTMLElement | null>(null);
+  const reduceMotion = useSyncExternalStore(
+    subscribeReducedMotion,
+    getReducedMotionSnapshot,
+    getReducedMotionServerSnapshot,
+  );
   const [visible, setVisible] = useState(false);
+  const show = reduceMotion || visible;
 
   useEffect(() => {
+    if (reduceMotion) return;
     const el = ref.current;
     if (!el) return;
-
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) {
-      setVisible(true);
-      debug("Reveal: reduced-motion → instant visible", id ?? variant);
-      return;
-    }
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setVisible(true);
-          debug("Reveal: visible", id ?? variant);
           if (once) observer.unobserve(el);
         } else if (!once) {
           setVisible(false);
         }
       },
-      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" },
+      { threshold: 0.08, rootMargin: "0px 0px -24px 0px" },
     );
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, [once, id, variant]);
+  }, [once, reduceMotion]);
 
   return (
     <Tag
       ref={ref}
       id={id}
-      className={`reveal reveal-${variant}${visible ? " is-visible" : ""}${className ? ` ${className}` : ""}`}
-      style={{ ...style, transitionDelay: visible ? `${delay}ms` : undefined }}
+      className={`reveal reveal-${variant}${show ? " is-visible" : ""}${className ? ` ${className}` : ""}`}
+      style={{ ...style, transitionDelay: show ? `${delay}ms` : undefined }}
     >
       {children}
     </Tag>

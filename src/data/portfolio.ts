@@ -228,7 +228,6 @@ export const projects: Project[] = [
     ],
     links: {
       github: "https://github.com/mah5472651",
-      writeup: "/blog/lora-recipes-that-transfer",
     },
     access: "case-study",
     featured: true,
@@ -345,7 +344,6 @@ export const projects: Project[] = [
     tags: ["RAG", "pgvector", "BM25", "Hybrid search", "Redis", "Python"],
     links: {
       github: "https://github.com/mah5472651",
-      writeup: "/blog/hybrid-search-that-actually-ships",
     },
     access: "case-study",
     featured: true,
@@ -404,7 +402,6 @@ export const projects: Project[] = [
     tags: ["Agents", "Evals", "MLOps", "CI", "Canary", "Python"],
     links: {
       github: "https://github.com/mah5472651",
-      writeup: "/blog/building-eval-gates-for-agents",
     },
     access: "case-study",
     featured: true,
@@ -443,22 +440,27 @@ export const experience = [
 export type EducationItem = {
   school: string;
   degree: string;
+  group?: string;
   period: string;
+  gpa?: string;
   location?: string;
   bullets?: string[];
 };
 
 export const education: EducationItem[] = [
   {
-    school: "Applied AI engineering track",
-    degree: "Production LLMs · Agents · RAG · Distributed training",
-    period: "2022 — Present",
-    location: "Barishal, Bangladesh / Remote",
-    bullets: [
-      "Intensive applied study of multi-agent systems, hybrid retrieval, eval gates, and LLM training infrastructure.",
-      "Learning validated by shipping systems at Craftly and Aeitron AI — not coursework alone.",
-      "Full academic credentials and certifications listed on resume.pdf and LinkedIn.",
-    ],
+    school: "Govt BM College",
+    degree: "Higher Secondary Certificate (HSC)",
+    group: "Science Group",
+    period: "Expected Completion: 2028",
+    gpa: "Expected GPA: 5.00",
+  },
+  {
+    school: "Baghia Al-Amin Kamil Madrasah",
+    degree: "Secondary School Certificate (SSC)",
+    group: "Science Group",
+    period: "Completed: 2026",
+    gpa: "GPA: 5.00",
   },
 ];
 

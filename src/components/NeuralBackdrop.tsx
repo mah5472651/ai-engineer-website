@@ -1,8 +1,7 @@
-"use client";
-
 /**
- * Ambient AI backdrop — soft orbs + faint grid pulse.
- * Decorative only; disabled under prefers-reduced-motion.
+ * Ambient AI backdrop — soft orbs (static on mobile; light drift on desktop).
+ * Decorative only; motion gated via CSS prefers-reduced-motion.
+ * Server component: no client JS cost.
  */
 export default function NeuralBackdrop() {
   return (

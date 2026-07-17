@@ -58,29 +58,33 @@ export default function Experience() {
           ))}
         </ol>
 
-        {/* Education — full on-page story (not PDF-only) */}
+        {/* Education stays on landing page only — not in header nav */}
         <div id="education" className="mt-16 scroll-mt-24 sm:mt-20">
           <SectionHeading
             command="cat education.md"
             title="Education"
-            subtitle="Applied track on-page; formal credentials also on resume.pdf."
+            subtitle="Academic credentials — HSC and SSC listed separately."
           />
 
-          <ul className="grid gap-3">
+          <ul className="grid gap-4 sm:grid-cols-2">
             {education.map((ed, i) => (
               <Reveal key={ed.school + ed.degree} delay={i * 80} variant="up" as="li">
-                <div className="card-lift rounded-xl border border-card-border bg-card/50 p-5 sm:p-6">
-                  <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
-                    <div>
-                      <h3 className="text-lg font-semibold text-foreground">
-                        {ed.degree}
-                      </h3>
-                      <p className="font-mono text-sm text-accent">{ed.school}</p>
-                    </div>
-                    <div className="mt-1 font-mono text-xs text-muted sm:mt-0 sm:text-right">
-                      {ed.period && <p>{ed.period}</p>}
-                      {ed.location && <p>{ed.location}</p>}
-                    </div>
+                <article className="card-lift flex h-full flex-col rounded-xl border border-card-border bg-card/50 p-5 sm:p-6">
+                  <h3 className="text-lg font-semibold leading-snug text-foreground">
+                    {ed.degree}
+                  </h3>
+                  <p className="mt-1.5 font-mono text-sm text-accent">{ed.school}</p>
+                  {ed.group && (
+                    <p className="mt-3 font-mono text-xs text-muted">{ed.group}</p>
+                  )}
+                  <div className="mt-auto border-t border-card-border/80 pt-4 mt-4">
+                    <p className="font-mono text-xs text-foreground/85">{ed.period}</p>
+                    {ed.gpa && (
+                      <p className="mt-1 font-mono text-xs text-accent">{ed.gpa}</p>
+                    )}
+                    {ed.location && (
+                      <p className="mt-1 font-mono text-xs text-muted">{ed.location}</p>
+                    )}
                   </div>
                   {ed.bullets && ed.bullets.length > 0 && (
                     <ul className="mt-4 space-y-2">
@@ -97,17 +101,7 @@ export default function Experience() {
                       ))}
                     </ul>
                   )}
-                  <p className="mt-4 font-mono text-[11px] text-muted">
-                    <a
-                      href="/resume.pdf"
-                      download
-                      className="text-accent underline-offset-4 hover:underline"
-                    >
-                      resume.pdf ↓
-                    </a>{" "}
-                    — full academic details
-                  </p>
-                </div>
+                </article>
               </Reveal>
             ))}
           </ul>

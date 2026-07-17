@@ -7,7 +7,6 @@ import MetricStrip from "@/components/MetricStrip";
 import Navbar from "@/components/Navbar";
 import ProjectArchitecture from "@/components/ProjectArchitecture";
 import { getProjectBySlug, projects, site } from "@/data/portfolio";
-import { debug } from "@/lib/debug";
 import { buildPageMetadata, projectJsonLd } from "@/lib/seo";
 
 type Props = {
@@ -34,7 +33,6 @@ export default async function ProjectPage({ params }: Props) {
   const { slug } = await params;
   const project = getProjectBySlug(slug);
   if (!project) {
-    debug("project not found", slug);
     notFound();
   }
 
