@@ -58,37 +58,52 @@ export default function Experience() {
           ))}
         </ol>
 
-        {/* Education stays on landing page only — not in header nav */}
+        {/* Education — stacked HSC → SSC, same timeline card design as experience */}
         <div id="education" className="mt-16 scroll-mt-24 sm:mt-20">
           <SectionHeading
             command="cat education.md"
             title="Education"
-            subtitle="Academic credentials — HSC and SSC listed separately."
+            subtitle="Academic credentials — HSC first, then SSC."
           />
 
-          <ul className="grid gap-4 sm:grid-cols-2">
+          <ol className="relative space-y-0 border-l border-card-border pl-6 sm:pl-8">
             {education.map((ed, i) => (
-              <Reveal key={ed.school + ed.degree} delay={i * 80} variant="up" as="li">
-                <article className="card-lift flex h-full flex-col rounded-xl border border-card-border bg-card/50 p-5 sm:p-6">
-                  <h3 className="text-lg font-semibold leading-snug text-foreground">
-                    {ed.degree}
-                  </h3>
-                  <p className="mt-1.5 font-mono text-sm text-accent">{ed.school}</p>
-                  {ed.group && (
-                    <p className="mt-3 font-mono text-xs text-muted">{ed.group}</p>
-                  )}
-                  <div className="mt-auto border-t border-card-border/80 pt-4 mt-4">
-                    <p className="font-mono text-xs text-foreground/85">{ed.period}</p>
-                    {ed.gpa && (
-                      <p className="mt-1 font-mono text-xs text-accent">{ed.gpa}</p>
-                    )}
-                    {ed.location && (
-                      <p className="mt-1 font-mono text-xs text-muted">{ed.location}</p>
-                    )}
-                  </div>
-                  {ed.bullets && ed.bullets.length > 0 && (
+              <Reveal key={ed.school + ed.degree} delay={i * 90} variant="up" as="li">
+                <div className="relative pb-12 last:pb-0">
+                  <span className="absolute -left-[1.55rem] top-1.5 flex h-3 w-3 items-center justify-center sm:-left-[2.05rem]">
+                    <span
+                      className={`h-2.5 w-2.5 rounded-full ring-4 ring-background ${
+                        i === 0
+                          ? "timeline-live bg-accent shadow-[0_0_12px_var(--accent)]"
+                          : "bg-muted"
+                      }`}
+                    />
+                  </span>
+
+                  <div className="card-lift rounded-xl border border-card-border bg-card/50 p-5 sm:p-6">
+                    <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
+                      <div>
+                        <h3 className="text-lg font-semibold text-foreground">
+                          {ed.degree}
+                        </h3>
+                        <p className="font-mono text-sm text-accent">{ed.school}</p>
+                      </div>
+                      <div className="mt-1 font-mono text-xs text-muted sm:mt-0 sm:text-right">
+                        <p>{ed.period}</p>
+                        {ed.gpa && <p className="text-accent">{ed.gpa}</p>}
+                        {ed.location && <p>{ed.location}</p>}
+                      </div>
+                    </div>
                     <ul className="mt-4 space-y-2">
-                      {ed.bullets.map((b) => (
+                      {ed.group && (
+                        <li className="flex gap-2 text-sm leading-relaxed text-muted">
+                          <span className="mt-1.5 shrink-0 font-mono text-accent/70">
+                            ▹
+                          </span>
+                          <span>{ed.group}</span>
+                        </li>
+                      )}
+                      {ed.bullets?.map((b) => (
                         <li
                           key={b}
                           className="flex gap-2 text-sm leading-relaxed text-muted"
@@ -100,11 +115,11 @@ export default function Experience() {
                         </li>
                       ))}
                     </ul>
-                  )}
-                </article>
+                  </div>
+                </div>
               </Reveal>
             ))}
-          </ul>
+          </ol>
         </div>
       </div>
     </section>

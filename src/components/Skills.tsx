@@ -12,14 +12,14 @@ export default function Skills() {
           subtitle="Tools I use to train, serve, and evaluate models in production."
         />
 
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid auto-rows-fr gap-4 sm:grid-cols-2">
           {skills.categories.map((cat, i) => (
-            <Reveal key={cat.title} delay={i * 80} variant="up">
-              <div className="card-lift rounded-xl border border-card-border bg-card/60 p-6">
-                <h3 className="mb-4 font-mono text-sm font-medium text-accent">
+            <Reveal key={cat.title} delay={i * 80} variant="up" className="h-full">
+              <div className="card-lift flex h-full min-h-[11.5rem] flex-col rounded-xl border border-card-border bg-card/60 p-6 sm:min-h-[12.5rem]">
+                <h3 className="mb-4 shrink-0 font-mono text-sm font-medium text-accent">
                   {cat.title}
                 </h3>
-                <ul className="flex flex-wrap gap-2">
+                <ul className="flex flex-1 flex-wrap content-start gap-2">
                   {cat.items.map((item) => (
                     <li
                       key={item}
