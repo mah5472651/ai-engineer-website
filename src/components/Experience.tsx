@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { education, experience } from "@/data/portfolio";
 import Reveal from "./Reveal";
 import SectionHeading from "./SectionHeading";
@@ -9,12 +10,12 @@ export default function Experience() {
         <SectionHeading
           command="git log --oneline career"
           title="Experience"
-          subtitle="Roles where I owned models, platforms, and outcomes."
+          subtitle="Roles where I owned models, platforms, and outcomes — open a role for the full story."
         />
 
         <ol className="relative space-y-0 border-l border-card-border pl-6 sm:pl-8">
           {experience.map((job, i) => (
-            <Reveal key={job.company + job.period} delay={i * 90} variant="up" as="li">
+            <Reveal key={job.slug} delay={i * 90} variant="up" as="li">
               <div className="relative pb-12 last:pb-0">
                 <span className="absolute -left-[1.55rem] top-1.5 flex h-3 w-3 items-center justify-center sm:-left-[2.05rem]">
                   <span
@@ -26,10 +27,13 @@ export default function Experience() {
                   />
                 </span>
 
-                <div className="card-lift rounded-xl border border-card-border bg-card/50 p-5 sm:p-6">
+                <Link
+                  href={`/experience/${job.slug}`}
+                  className="card-lift group block rounded-xl border border-card-border bg-card/50 p-5 transition sm:p-6"
+                >
                   <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
                     <div>
-                      <h3 className="text-lg font-semibold text-foreground">
+                      <h3 className="text-lg font-semibold text-foreground transition group-hover:text-accent">
                         {job.role}
                       </h3>
                       <p className="font-mono text-sm text-accent">{job.company}</p>
@@ -52,7 +56,10 @@ export default function Experience() {
                       </li>
                     ))}
                   </ul>
-                </div>
+                  <span className="mt-5 inline-flex font-mono text-xs text-accent opacity-90 transition group-hover:underline">
+                    open role case study →
+                  </span>
+                </Link>
               </div>
             </Reveal>
           ))}

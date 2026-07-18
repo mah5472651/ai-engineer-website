@@ -139,3 +139,30 @@ export function projectJsonLd(project: {
   };
 }
 
+export function experienceJsonLd(role: {
+  pageTitle: string;
+  summary: string;
+  slug: string;
+  company: string;
+  role: string;
+  focusAreas: string[];
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    name: role.pageTitle,
+    description: role.summary,
+    url: absoluteUrl(`/experience/${role.slug}`),
+    mainEntity: {
+      "@type": "Person",
+      name: site.name,
+      jobTitle: role.role,
+      worksFor: {
+        "@type": "Organization",
+        name: role.company,
+      },
+      knowsAbout: role.focusAreas,
+    },
+  };
+}
+

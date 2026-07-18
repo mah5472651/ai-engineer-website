@@ -6,6 +6,7 @@ Includes:
 
 - Full portfolio (hero, about, skills, projects, experience, education, contact)
 - Project case studies with metrics + architecture diagrams (`/projects/[slug]`)
+- Experience role landings with full narrative (`/experience/[slug]`)
 - Dynamic Open Graph / Twitter images
 - Ambient AI animations (respects `prefers-reduced-motion`)
 - Downloadable resume (`public/resume.pdf`)

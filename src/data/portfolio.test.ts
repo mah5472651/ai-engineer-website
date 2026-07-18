@@ -101,12 +101,23 @@ describe("projects", () => {
 });
 
 describe("experience, education & skills", () => {
-  it("lists experience with company, role, and bullets", () => {
+  it("lists experience with company, role, slug, and detail content", () => {
     expect(experience.length).toBeGreaterThan(0);
+    const slugs = experience.map((j) => j.slug);
+    expect(new Set(slugs).size).toBe(slugs.length);
     for (const job of experience) {
       expect(job.company.trim().length).toBeGreaterThan(0);
       expect(job.role.trim().length).toBeGreaterThan(0);
+      expect(job.slug).toMatch(/^[a-z0-9]+(?:-[a-z0-9]+)*$/);
       expect(job.bullets.length).toBeGreaterThan(0);
+      expect(job.pageTitle.trim().length).toBeGreaterThan(0);
+      expect(job.headline.trim().length).toBeGreaterThan(0);
+      expect(job.overview.length).toBeGreaterThan(0);
+      expect(job.responsibilities.length).toBeGreaterThan(0);
+      expect(job.contributions.length).toBeGreaterThan(0);
+      expect(job.focusAreas.length).toBeGreaterThan(0);
+      expect(job.vision.trim().length).toBeGreaterThan(0);
+      expect(job.journey.trim().length).toBeGreaterThan(0);
     }
   });
 

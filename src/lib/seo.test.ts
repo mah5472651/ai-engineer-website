@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   absoluteUrl,
   buildPageMetadata,
+  experienceJsonLd,
   personJsonLd,
   projectJsonLd,
   websiteJsonLd,
@@ -65,5 +66,18 @@ describe("JSON-LD builders", () => {
     });
     expect(project["@type"]).toBe("CreativeWork");
     expect(project.url).toBe(`${getSiteUrl()}/projects/test`);
+  });
+
+  it("builds experience schema", () => {
+    const exp = experienceJsonLd({
+      pageTitle: "COO — Craftly",
+      summary: "Operations and frontier AI.",
+      slug: "craftly-coo",
+      company: "Craftly",
+      role: "COO",
+      focusAreas: ["AI Operations"],
+    });
+    expect(exp["@type"]).toBe("ProfilePage");
+    expect(exp.url).toBe(`${getSiteUrl()}/experience/craftly-coo`);
   });
 });

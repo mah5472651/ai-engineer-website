@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { projects } from "@/data/portfolio";
+import { experience, projects } from "@/data/portfolio";
 import { getSiteUrl } from "@/lib/site-url";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -22,5 +22,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.9,
   }));
 
-  return [...staticRoutes, ...projectRoutes];
+  const experienceRoutes: MetadataRoute.Sitemap = experience.map((e) => ({
+    url: `${base}/experience/${e.slug}`,
+    lastModified: now,
+    changeFrequency: "monthly" as const,
+    priority: 0.85,
+  }));
+
+  return [...staticRoutes, ...projectRoutes, ...experienceRoutes];
 }

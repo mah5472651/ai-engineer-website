@@ -410,10 +410,40 @@ export function getProjectBySlug(slug: string): Project | undefined {
   return projects.find((p) => p.slug === slug);
 }
 
-export const experience = [
+export type ExperienceResponsibility = {
+  title: string;
+  description: string;
+};
+
+export type ExperienceRole = {
+  slug: string;
+  company: string;
+  role: string;
+  /** Full role title for detail page H1 */
+  pageTitle: string;
+  period: string;
+  location: string;
+  /** Homepage timeline bullets */
+  bullets: string[];
+  /** Detail page hero subtitle */
+  headline: string;
+  /** Short meta / card description */
+  summary: string;
+  /** Opening narrative paragraphs */
+  overview: string[];
+  responsibilities: ExperienceResponsibility[];
+  contributions: string[];
+  focusAreas: string[];
+  vision: string;
+  journey: string;
+};
+
+export const experience: ExperienceRole[] = [
   {
+    slug: "craftly-coo",
     company: "Craftly",
     role: "COO · AI Engineer",
+    pageTitle: "Chief Operating Officer (COO) — Craftly",
     period: "Present",
     location: "Bangladesh / Remote",
     bullets: [
@@ -421,10 +451,75 @@ export const experience = [
       "Own production path: evaluation, reliability, and promotion criteria from prototype to shippable systems.",
       "Lead cross-functional teams building competitive AI products from Bangladesh.",
     ],
+    headline: "Building the Future of Frontier Intelligence",
+    summary:
+      "COO at Craftly — strategic execution, frontier model development coordination, and organizational scaling for proprietary intelligence built from scratch.",
+    overview: [
+      "In 2026, I joined Craftly as Chief Operating Officer with a mission to help build a world-class AI company focused on developing proprietary frontier intelligence from scratch. My role extends beyond traditional operations, covering strategic execution, AI development coordination, organizational scaling, and the creation of systems that enable long-term innovation.",
+      "At Craftly, we are working toward building advanced AI technologies capable of transforming software development through intelligent automation, developer-focused AI systems, and next-generation model architectures.",
+    ],
+    responsibilities: [
+      {
+        title: "Operational Leadership",
+        description:
+          "Leading company operations and ensuring alignment between business objectives, engineering execution, and long-term organizational growth.",
+      },
+      {
+        title: "AI Model Development",
+        description:
+          "Supporting the development of specialized AI models designed to automate and accelerate software development workflows, particularly within Flutter and Node.js ecosystems.",
+      },
+      {
+        title: "Research & Innovation",
+        description:
+          "Collaborating closely with AI researchers and engineers to advance domain-specific language models, developer tools, and intelligent systems that streamline software engineering processes.",
+      },
+      {
+        title: "Team Building & Talent Development",
+        description:
+          "Helping build a high-performance culture by supporting talent development, operational excellence, and cross-functional collaboration between technical and non-technical teams.",
+      },
+      {
+        title: "Product Strategy & Execution",
+        description:
+          "Working alongside engineering teams to translate ambitious AI research initiatives into scalable products and practical solutions that solve real-world problems.",
+      },
+      {
+        title: "Organizational Scaling",
+        description:
+          "Designing operational frameworks, workflows, and execution systems that enable Craftly to scale efficiently while maintaining speed, quality, and innovation.",
+      },
+    ],
+    contributions: [
+      "Leading operational execution across the organization.",
+      "Supporting the development of proprietary AI technologies.",
+      "Coordinating engineering and product initiatives.",
+      "Establishing scalable internal systems and processes.",
+      "Contributing to the creation of developer-focused AI solutions.",
+      "Helping position Craftly as a future leader in frontier AI innovation.",
+    ],
+    focusAreas: [
+      "AI Operations",
+      "Frontier Model Development",
+      "Organizational Scaling",
+      "Product Strategy",
+      "Team Leadership",
+      "Engineering Coordination",
+      "Developer AI Systems",
+      "Startup Growth",
+      "Execution Management",
+      "AI Infrastructure",
+    ],
+    vision:
+      "Craftly's vision is to build globally competitive frontier intelligence from Bangladesh and contribute to the next generation of artificial intelligence systems. By combining cutting-edge research, strong operational foundations, and exceptional talent, we aim to create AI technologies capable of impacting both local and international technology ecosystems.",
+    journey:
+      "Joining Craftly marked a significant step in my journey as an AI operator and technology leader. As COO, I have had the opportunity to work at the intersection of AI research, engineering, and business execution—helping transform ambitious ideas into structured initiatives that move the company closer to its long-term vision of building frontier intelligence from scratch.",
   },
   {
+    slug: "aeitron-ai-founder-ceo",
     company: "Aeitron AI",
     role: "Founder & CEO",
+    pageTitle: "Founder & CEO — Aeitron AI",
     period: "Present",
     location: "Barishal, Bangladesh / Remote",
     bullets: [
@@ -432,8 +527,65 @@ export const experience = [
       "Specialize in multi-agent orchestration, memory architectures, and high-performance RAG pipelines.",
       "Own product vision and technical direction for automation operators can trust in production.",
     ],
+    headline: "Multi-Agent Automation for High-Ticket Operations",
+    summary:
+      "Founder & CEO of Aeitron AI — multi-agent systems, memory architectures, and production RAG for real estate and high-ticket sectors.",
+    overview: [
+      "I founded Aeitron AI to build multi-agent automation operators can trust in production — not demos that only work in a notebook. The company focuses on high-ticket sectors such as real estate, where reliability, retrieval quality, and agent coordination determine whether automation actually ships.",
+      "As Founder & CEO I own product vision and technical direction: multi-agent orchestration, advanced memory architectures, cybersecurity intelligence surfaces, and high-performance RAG pipelines that sit on the same operational data teams already use.",
+    ],
+    responsibilities: [
+      {
+        title: "Product Vision & Technical Direction",
+        description:
+          "Setting the roadmap for multi-agent automation products and ensuring architecture choices map to operator outcomes in high-ticket workflows.",
+      },
+      {
+        title: "Multi-Agent Orchestration",
+        description:
+          "Designing agent roles, tools, and handoffs so complex operational tasks complete reliably end-to-end.",
+      },
+      {
+        title: "Memory & RAG Systems",
+        description:
+          "Building advanced memory architectures and high-performance retrieval pipelines grounded in real operational data.",
+      },
+      {
+        title: "Operator-Facing Products",
+        description:
+          "Shipping surfaces such as finance, CRM, and team tools with AI copilots that reduce friction for real estate and agency operators.",
+      },
+      {
+        title: "Team & Execution",
+        description:
+          "Leading engineering and product execution so ambitious automation ideas become structured, shippable systems.",
+      },
+    ],
+    contributions: [
+      "Founded Aeitron AI for multi-agent automation in high-ticket sectors.",
+      "Shipped multi-agent and RAG-oriented systems for production workflows.",
+      "Built operator products including finance and CRM copilots.",
+      "Defined technical standards for reliability, retrieval quality, and agent evaluation.",
+    ],
+    focusAreas: [
+      "Multi-Agent Systems",
+      "Memory Architectures",
+      "High-Performance RAG",
+      "Real Estate Ops",
+      "AI Copilots",
+      "Product Leadership",
+      "Production Reliability",
+    ],
+    vision:
+      "Aeitron AI aims to make multi-agent automation a dependable operator tool — globally competitive systems built from Bangladesh that replace brittle manual workflows with reliable, measurable automation.",
+    journey:
+      "Building Aeitron AI has been a hands-on path from research-minded agent design to production systems: owning both the company and the technical stack so multi-agent products can survive real operational load.",
   },
 ];
+
+export function getExperienceBySlug(slug: string): ExperienceRole | undefined {
+  return experience.find((e) => e.slug === slug);
+}
 
 export type EducationItem = {
   school: string;

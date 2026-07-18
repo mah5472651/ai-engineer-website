@@ -19,7 +19,8 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const menuId = useId();
-  const onInnerPage = pathname?.startsWith("/projects");
+  const onInnerPage =
+    pathname?.startsWith("/projects") || pathname?.startsWith("/experience");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -67,7 +68,10 @@ export default function Navbar() {
         <ul className="hidden items-center gap-0.5 md:flex lg:gap-1">
           {sectionLinks.map((link) => {
             const active =
-              link.href === "/#projects" && pathname?.startsWith("/projects");
+              (link.href === "/#projects" &&
+                pathname?.startsWith("/projects")) ||
+              (link.href === "/#experience" &&
+                pathname?.startsWith("/experience"));
             return (
               <li key={link.href}>
                 <Link
