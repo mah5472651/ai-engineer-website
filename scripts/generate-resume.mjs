@@ -43,9 +43,9 @@ const experience = [
     period: "Present",
     location: "Barishal, Bangladesh / Remote",
     bullets: [
-      "Founded Aeitron AI for multi-agent automation in high-ticket sectors including real estate.",
-      "Specialize in multi-agent orchestration, memory architectures, and high-performance RAG pipelines.",
-      "Own product vision and technical direction for automation operators can trust in production.",
+      "Founded Aeitron AI to deliver intelligent automation, agentic workflows, and scalable AI systems for modern businesses.",
+      "Lead strategy, AI architecture, product development, and client delivery across multi-agent automation.",
+      "Build enterprise-grade workflows with n8n, Make, and Claude Code for real estate and service-based businesses.",
     ],
   },
 ];

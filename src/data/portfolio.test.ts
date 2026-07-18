@@ -118,7 +118,40 @@ describe("experience, education & skills", () => {
       expect(job.focusAreas.length).toBeGreaterThan(0);
       expect(job.vision.trim().length).toBeGreaterThan(0);
       expect(job.journey.trim().length).toBeGreaterThan(0);
+      if (job.offerings) {
+        expect(job.offerings.length).toBeGreaterThan(0);
+        for (const o of job.offerings) {
+          expect(o.title.trim().length).toBeGreaterThan(0);
+          expect(o.description.trim().length).toBeGreaterThan(0);
+        }
+      }
+      if (job.industryFocus) {
+        expect(job.industryFocus.intro.trim().length).toBeGreaterThan(0);
+        expect(job.industryFocus.items.length).toBeGreaterThan(0);
+        for (const item of job.industryFocus.items) {
+          expect(item.title.trim().length).toBeGreaterThan(0);
+          expect(item.description.trim().length).toBeGreaterThan(0);
+        }
+      }
     }
+  });
+
+  it("Aeitron founder page uses the full automation narrative", () => {
+    const aeitron = experience.find((j) => j.slug === "aeitron-ai-founder-ceo");
+    expect(aeitron).toBeDefined();
+    expect(aeitron!.pageTitle).toBe("Founder & CEO — Aeitron AI");
+    expect(aeitron!.headline).toMatch(/Intelligent Automation/i);
+    expect(aeitron!.offerings?.length).toBeGreaterThanOrEqual(5);
+    expect(aeitron!.industryFocus?.items.map((i) => i.title)).toEqual(
+      expect.arrayContaining([
+        "Real Estate",
+        "Service-Based Businesses",
+        "AI-Driven Startups",
+      ]),
+    );
+    expect(aeitron!.focusAreas).toEqual(
+      expect.arrayContaining(["n8n", "Make", "Claude Code"]),
+    );
   });
 
   it("has real education entries (not PDF-only placeholders)", () => {

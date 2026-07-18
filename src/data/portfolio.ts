@@ -415,6 +415,12 @@ export type ExperienceResponsibility = {
   description: string;
 };
 
+/** Reusable titled block (offerings, industry cards, etc.) */
+export type ExperienceBlock = {
+  title: string;
+  description: string;
+};
+
 export type ExperienceRole = {
   slug: string;
   company: string;
@@ -431,9 +437,19 @@ export type ExperienceRole = {
   summary: string;
   /** Opening narrative paragraphs */
   overview: string[];
+  /** Optional product/offering cards (e.g. What We Build) */
+  offerings?: ExperienceBlock[];
   responsibilities: ExperienceResponsibility[];
   contributions: string[];
+  /** Optional industry focus with intro + sector cards */
+  industryFocus?: {
+    intro: string;
+    items: ExperienceBlock[];
+  };
+  /** Focus areas or tech/platform tags */
   focusAreas: string[];
+  /** Label for focusAreas section on detail page */
+  focusAreasLabel?: string;
   vision: string;
   journey: string;
 };
@@ -523,63 +539,118 @@ export const experience: ExperienceRole[] = [
     period: "Present",
     location: "Barishal, Bangladesh / Remote",
     bullets: [
-      "Founded Aeitron AI for multi-agent automation in high-ticket sectors including real estate.",
-      "Specialize in multi-agent orchestration, memory architectures, and high-performance RAG pipelines.",
-      "Own product vision and technical direction for automation operators can trust in production.",
+      "Founded Aeitron AI to deliver intelligent automation, agentic workflows, and scalable AI systems for modern businesses.",
+      "Lead strategy, AI architecture, product development, and client delivery across multi-agent automation.",
+      "Build enterprise-grade workflows with n8n, Make, and Claude Code for real estate and service-based businesses.",
     ],
-    headline: "Multi-Agent Automation for High-Ticket Operations",
+    headline: "Building Intelligent Automation for Modern Businesses",
     summary:
-      "Founder & CEO of Aeitron AI — multi-agent systems, memory architectures, and production RAG for real estate and high-ticket sectors.",
+      "Founder & CEO of Aeitron AI — intelligent automation, multi-agent workflows, and custom AI integrations that help modern organizations operate more efficiently.",
     overview: [
-      "I founded Aeitron AI to build multi-agent automation operators can trust in production — not demos that only work in a notebook. The company focuses on high-ticket sectors such as real estate, where reliability, retrieval quality, and agent coordination determine whether automation actually ships.",
-      "As Founder & CEO I own product vision and technical direction: multi-agent orchestration, advanced memory architectures, cybersecurity intelligence surfaces, and high-performance RAG pipelines that sit on the same operational data teams already use.",
+      "In 2026, I founded Aeitron AI with a vision to help businesses unlock the full potential of artificial intelligence through intelligent automation, agentic workflows, and scalable AI systems. What began as an idea to bridge the gap between AI innovation and business operations has evolved into a company focused on delivering practical, high-impact automation solutions for modern organizations.",
+      "As Founder & CEO, I lead the company's strategy, AI architecture, product development, client delivery, and long-term vision while continuously exploring new ways to combine automation, intelligence, and operational excellence.",
+    ],
+    offerings: [
+      {
+        title: "AI Automation Systems",
+        description:
+          "Designing end-to-end automation solutions that eliminate repetitive work, reduce operational overhead, and improve business efficiency through intelligent workflows.",
+      },
+      {
+        title: "Multi-Agent Workflows",
+        description:
+          "Engineering advanced agentic systems capable of coordinating multiple AI agents to perform research, analysis, communication, lead management, and operational tasks autonomously.",
+      },
+      {
+        title: "Custom AI Integrations",
+        description:
+          "Developing tailored AI-powered solutions that seamlessly integrate with CRMs, databases, communication platforms, and existing business infrastructures.",
+      },
+      {
+        title: "Workflow Engineering",
+        description:
+          "Building scalable automation pipelines using modern orchestration tools to create reliable and efficient business processes across departments.",
+      },
+      {
+        title: "AI-Powered Business Operations",
+        description:
+          "Transforming traditional workflows into intelligent systems capable of assisting decision-making, improving productivity, and accelerating growth.",
+      },
     ],
     responsibilities: [
       {
-        title: "Product Vision & Technical Direction",
+        title: "Company Leadership",
         description:
-          "Setting the roadmap for multi-agent automation products and ensuring architecture choices map to operator outcomes in high-ticket workflows.",
+          "Leading the strategic direction, vision, and growth of Aeitron AI while ensuring the company remains focused on delivering meaningful business outcomes through AI.",
       },
       {
-        title: "Multi-Agent Orchestration",
+        title: "AI Systems Architecture",
         description:
-          "Designing agent roles, tools, and handoffs so complex operational tasks complete reliably end-to-end.",
+          "Architecting intelligent automation solutions, agentic workflows, and scalable AI infrastructures designed to solve complex operational challenges.",
       },
       {
-        title: "Memory & RAG Systems",
+        title: "Product Development",
         description:
-          "Building advanced memory architectures and high-performance retrieval pipelines grounded in real operational data.",
+          "Overseeing the design, development, testing, and deployment of AI-powered products and automation systems for clients and internal initiatives.",
       },
       {
-        title: "Operator-Facing Products",
+        title: "Client Solutions",
         description:
-          "Shipping surfaces such as finance, CRM, and team tools with AI copilots that reduce friction for real estate and agency operators.",
+          "Working closely with businesses to identify operational bottlenecks and design custom AI systems that improve efficiency and scalability.",
       },
       {
-        title: "Team & Execution",
+        title: "Innovation & Research",
         description:
-          "Leading engineering and product execution so ambitious automation ideas become structured, shippable systems.",
+          "Continuously exploring emerging AI technologies, automation frameworks, and agentic architectures to deliver next-generation solutions.",
       },
     ],
     contributions: [
-      "Founded Aeitron AI for multi-agent automation in high-ticket sectors.",
-      "Shipped multi-agent and RAG-oriented systems for production workflows.",
-      "Built operator products including finance and CRM copilots.",
-      "Defined technical standards for reliability, retrieval quality, and agent evaluation.",
+      "Founded and scaled Aeitron AI from the ground up.",
+      "Designed advanced multi-agent automation systems.",
+      "Built enterprise-grade workflows using n8n, Make, and Claude Code.",
+      "Developed AI-powered operational solutions for business automation.",
+      "Created scalable AI integration frameworks for modern organizations.",
+      "Delivered specialized automation solutions for real estate and service-based businesses.",
     ],
+    industryFocus: {
+      intro:
+        "While our technology can be applied across multiple industries, Aeitron AI currently focuses on sectors where intelligent automation creates significant business value.",
+      items: [
+        {
+          title: "Real Estate",
+          description:
+            "Developing AI-powered lead management systems, workflow automations, CRM integrations, and operational intelligence solutions that help real estate businesses scale efficiently.",
+        },
+        {
+          title: "Service-Based Businesses",
+          description:
+            "Building automation systems that streamline communication, project management, lead qualification, and client operations.",
+        },
+        {
+          title: "AI-Driven Startups",
+          description:
+            "Helping emerging companies leverage AI automation to operate faster, reduce manual workloads, and improve execution.",
+        },
+      ],
+    },
     focusAreas: [
-      "Multi-Agent Systems",
+      "Agentic AI Systems",
+      "Multi-Agent Orchestration",
+      "n8n",
+      "Make",
+      "Claude Code",
+      "AI Workflow Automation",
+      "RAG Systems",
       "Memory Architectures",
-      "High-Performance RAG",
-      "Real Estate Ops",
-      "AI Copilots",
-      "Product Leadership",
-      "Production Reliability",
+      "Context Engineering",
+      "API Integrations",
+      "Business Process Automation",
     ],
+    focusAreasLabel: "Technologies & Platforms",
     vision:
-      "Aeitron AI aims to make multi-agent automation a dependable operator tool — globally competitive systems built from Bangladesh that replace brittle manual workflows with reliable, measurable automation.",
+      "The future belongs to organizations that can combine human creativity with intelligent automation. At Aeitron AI, our vision is to build world-class AI automation solutions from Bangladesh and empower businesses around the world to operate more efficiently, make smarter decisions, and scale through the power of artificial intelligence.",
     journey:
-      "Building Aeitron AI has been a hands-on path from research-minded agent design to production systems: owning both the company and the technical stack so multi-agent products can survive real operational load.",
+      "Founding Aeitron AI marked the beginning of my entrepreneurial journey in artificial intelligence. It provided me with the opportunity to transform technical expertise into real-world business solutions while working directly with organizations seeking operational excellence through automation. Through Aeitron AI, I continue to explore the intersection of AI, automation, agentic systems, and business transformation—building practical technologies that create measurable impact while preparing for the next generation of intelligent software systems.",
   },
 ];
 

@@ -126,6 +126,29 @@ export default async function ExperiencePage({ params }: Props) {
               </div>
             </section>
 
+            {role.offerings && role.offerings.length > 0 && (
+              <section>
+                <h2 className="mb-5 font-mono text-sm text-accent">
+                  $ ls what-we-build/
+                </h2>
+                <ul className="grid gap-3 sm:grid-cols-2">
+                  {role.offerings.map((item) => (
+                    <li
+                      key={item.title}
+                      className="card-lift rounded-xl border border-card-border bg-card/50 p-5"
+                    >
+                      <h3 className="text-base font-semibold text-foreground">
+                        {item.title}
+                      </h3>
+                      <p className="mt-2 text-sm leading-relaxed text-muted">
+                        {item.description}
+                      </p>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
+
             <section>
               <h2 className="mb-5 font-mono text-sm text-accent">
                 $ ls responsibilities/
@@ -166,10 +189,44 @@ export default async function ExperiencePage({ params }: Props) {
               </ul>
             </section>
 
+            {role.industryFocus && (
+              <section className="space-y-5">
+                <h2 className="font-mono text-sm text-accent">
+                  $ cat industry-focus.md
+                </h2>
+                <p className="text-sm leading-relaxed text-muted sm:text-base">
+                  {role.industryFocus.intro}
+                </p>
+                <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                  {role.industryFocus.items.map((item) => (
+                    <li
+                      key={item.title}
+                      className="card-lift rounded-xl border border-card-border bg-card/50 p-5"
+                    >
+                      <h3 className="text-base font-semibold text-foreground">
+                        {item.title}
+                      </h3>
+                      <p className="mt-2 text-sm leading-relaxed text-muted">
+                        {item.description}
+                      </p>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
+
             <section>
               <h2 className="mb-4 font-mono text-sm text-accent">
-                $ ls focus-areas/
+                $ ls{" "}
+                {role.focusAreasLabel
+                  ? "technologies/"
+                  : "focus-areas/"}
               </h2>
+              {role.focusAreasLabel && (
+                <h3 className="mb-3 text-lg font-semibold tracking-tight text-foreground sm:text-xl">
+                  {role.focusAreasLabel}
+                </h3>
+              )}
               <div className="flex flex-wrap gap-2">
                 {role.focusAreas.map((tag) => (
                   <span
