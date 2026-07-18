@@ -1,5 +1,6 @@
 import { contact, site } from "@/data/portfolio";
 import { maskPhone, whatsappCtaLabel } from "@/lib/privacy";
+import Reveal from "./Reveal";
 import SectionHeading from "./SectionHeading";
 
 export default function Contact() {
@@ -12,7 +13,7 @@ export default function Contact() {
       <div className="mx-auto max-w-6xl">
         <SectionHeading command="ping contact" title="Contact" />
 
-        <div className="glow-border overflow-hidden rounded-2xl border border-card-border bg-card">
+        <Reveal variant="scale" className="glow-border overflow-hidden rounded-2xl border border-card-border bg-card">
           <div className="flex items-center gap-2 border-b border-card-border px-4 py-2.5">
             <span className="h-2.5 w-2.5 rounded-full bg-danger/80" aria-hidden />
             <span className="h-2.5 w-2.5 rounded-full bg-yellow-400/80" aria-hidden />
@@ -112,7 +113,7 @@ export default function Contact() {
               </ul>
             </div>
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

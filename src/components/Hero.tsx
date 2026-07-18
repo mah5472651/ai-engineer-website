@@ -175,6 +175,16 @@ export default function Hero() {
           </p>
         </div>
       </div>
+
+      {/* Soft scroll cue — desktop only, respects reduced motion via CSS */}
+      <a
+        href="#about"
+        className="scroll-cue absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-1.5 font-mono text-[10px] tracking-wider text-muted/70 transition hover:text-accent sm:flex"
+        aria-label="Scroll to about section"
+      >
+        <span>scroll</span>
+        <span className="scroll-cue-line block h-6 w-px bg-gradient-to-b from-accent/60 to-transparent" aria-hidden />
+      </a>
     </section>
   );
 }

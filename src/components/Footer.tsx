@@ -1,12 +1,16 @@
 import Link from "next/link";
 import { site } from "@/data/portfolio";
+import Reveal from "./Reveal";
 
 export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
     <footer className="border-t border-card-border px-4 py-8 pb-[max(2rem,env(safe-area-inset-bottom))] sm:px-8 sm:py-10">
-      <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-5 sm:flex-row sm:items-center">
+      <Reveal
+        variant="fade"
+        className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-5 sm:flex-row sm:items-center"
+      >
         <p className="font-mono text-xs text-muted">
           <span className="text-accent">$</span> echo &quot;© {year} {site.name}
           &quot;
@@ -48,7 +52,7 @@ export default function Footer() {
             linkedin
           </a>
         </nav>
-      </div>
+      </Reveal>
     </footer>
   );
 }

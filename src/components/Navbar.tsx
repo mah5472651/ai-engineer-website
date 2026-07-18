@@ -7,18 +7,20 @@ import { site } from "@/data/portfolio";
 import ScrollProgress from "./ScrollProgress";
 
 const sectionLinks = [
-  { href: "/#about", label: "about" },
-  { href: "/#skills", label: "skills" },
-  { href: "/#projects", label: "projects" },
-  { href: "/#experience", label: "experience" },
-  { href: "/#contact", label: "contact" },
+  { href: "/#about", label: "about", id: "about" },
+  { href: "/#skills", label: "skills", id: "skills" },
+  { href: "/#projects", label: "projects", id: "projects" },
+  { href: "/#experience", label: "experience", id: "experience" },
+  { href: "/#contact", label: "contact", id: "contact" },
 ];
 
 export default function Navbar() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState<string>("");
   const menuId = useId();
+  const onHome = pathname === "/";
   const onInnerPage =
     pathname?.startsWith("/projects") || pathname?.startsWith("/experience");
 
@@ -43,7 +45,47 @@ export default function Navbar() {
     };
   }, [open]);
 
+  /* Active section highlight on the homepage — clean nav feedback */
+  useEffect(() => {
+    if (!onHome) {
+      setActiveSection("");
+      return;
+    }
+
+    const ids = sectionLinks.map((l) => l.id);
+    const elements = ids
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => Boolean(el));
+
+    if (elements.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+        if (visible[0]?.target?.id) {
+          setActiveSection(visible[0].target.id);
+        }
+      },
+      {
+        rootMargin: "-20% 0px -55% 0px",
+        threshold: [0, 0.15, 0.35, 0.55],
+      },
+    );
+
+    elements.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, [onHome]);
+
   const solid = scrolled || onInnerPage || open;
+
+  const isLinkActive = (link: (typeof sectionLinks)[number]) => {
+    if (link.id === "projects" && pathname?.startsWith("/projects")) return true;
+    if (link.id === "experience" && pathname?.startsWith("/experience")) return true;
+    if (onHome && activeSection === link.id) return true;
+    return false;
+  };
 
   return (
     <header
@@ -67,18 +109,15 @@ export default function Navbar() {
 
         <ul className="hidden items-center gap-0.5 md:flex lg:gap-1">
           {sectionLinks.map((link) => {
-            const active =
-              (link.href === "/#projects" &&
-                pathname?.startsWith("/projects")) ||
-              (link.href === "/#experience" &&
-                pathname?.startsWith("/experience"));
+            const active = isLinkActive(link);
             return (
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className={`rounded-md px-2.5 py-2 font-mono text-xs transition hover:bg-accent/10 hover:text-accent lg:px-3 ${
-                    active ? "text-accent" : "text-muted"
+                  className={`nav-link rounded-md px-2.5 py-2 font-mono text-xs transition hover:bg-accent/10 hover:text-accent lg:px-3 ${
+                    active ? "nav-link-active text-accent" : "text-muted"
                   }`}
+                  aria-current={active ? "true" : undefined}
                 >
                   ./{link.label}
                 </Link>
@@ -89,7 +128,7 @@ export default function Navbar() {
             <a
               href={site.resumeUrl}
               download
-              className="ml-1 rounded-md border border-accent/40 bg-accent/10 px-3 py-1.5 font-mono text-xs text-accent transition hover:bg-accent/20 lg:ml-2"
+              className="btn-glow ml-1 rounded-md border border-accent/40 bg-accent/10 px-3 py-1.5 font-mono text-xs text-accent transition hover:bg-accent/20 lg:ml-2"
             >
               resume.pdf
             </a>
@@ -108,35 +147,42 @@ export default function Navbar() {
         </button>
       </nav>
 
-      <div
-        id={menuId}
-        hidden={!open}
-        className="border-b border-card-border bg-background/95 px-4 py-3 backdrop-blur-md md:hidden"
-      >
-        <ul className="flex flex-col gap-1 pb-[env(safe-area-inset-bottom)]">
-          {sectionLinks.map((link) => (
-            <li key={link.href}>
-              <Link
-                href={link.href}
+      {open && (
+        <div
+          id={menuId}
+          className="nav-drawer border-b border-card-border bg-background/95 px-4 py-3 backdrop-blur-md md:hidden"
+        >
+          <ul className="flex flex-col gap-1 pb-[env(safe-area-inset-bottom)]">
+            {sectionLinks.map((link) => {
+              const active = isLinkActive(link);
+              return (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    onClick={() => setOpen(false)}
+                    className={`block min-h-11 rounded-md px-3 py-3 font-mono text-sm transition hover:bg-accent/10 hover:text-accent ${
+                      active ? "bg-accent/10 text-accent" : "text-muted"
+                    }`}
+                    aria-current={active ? "true" : undefined}
+                  >
+                    ./{link.label}
+                  </Link>
+                </li>
+              );
+            })}
+            <li>
+              <a
+                href={site.resumeUrl}
+                download
                 onClick={() => setOpen(false)}
-                className="block min-h-11 rounded-md px-3 py-3 font-mono text-sm text-muted hover:bg-accent/10 hover:text-accent"
+                className="mt-1 block min-h-11 rounded-md border border-accent/40 px-3 py-3 font-mono text-sm text-accent"
               >
-                ./{link.label}
-              </Link>
+                resume.pdf
+              </a>
             </li>
-          ))}
-          <li>
-            <a
-              href={site.resumeUrl}
-              download
-              onClick={() => setOpen(false)}
-              className="mt-1 block min-h-11 rounded-md border border-accent/40 px-3 py-3 font-mono text-sm text-accent"
-            >
-              resume.pdf
-            </a>
-          </li>
-        </ul>
-      </div>
+          </ul>
+        </div>
+      )}
       <ScrollProgress />
     </header>
   );

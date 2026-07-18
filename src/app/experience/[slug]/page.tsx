@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import Reveal from "@/components/Reveal";
 import {
   experience,
   getExperienceBySlug,
@@ -55,7 +56,7 @@ export default async function ExperiencePage({ params }: Props) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <header className="border-b border-card-border px-4 pb-10 pt-24 sm:px-8 sm:pb-16 sm:pt-28">
-          <div className="mx-auto max-w-4xl">
+          <div className="page-enter mx-auto max-w-4xl">
             <Link
               href="/#experience"
               className="inline-flex min-h-11 items-center font-mono text-xs text-muted transition hover:text-accent"
@@ -176,15 +177,14 @@ export default async function ExperiencePage({ params }: Props) {
               </h2>
               <ul className="space-y-3">
                 {role.contributions.map((item, i) => (
-                  <li
-                    key={item}
-                    className="card-lift flex gap-3 rounded-xl border border-card-border bg-card/50 p-4 text-sm leading-relaxed text-muted sm:p-5 sm:text-base"
-                  >
-                    <span className="shrink-0 font-mono text-xs text-accent">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <span className="min-w-0 break-words">{item}</span>
-                  </li>
+                  <Reveal key={item} delay={i * 70} variant="up" as="li">
+                    <div className="card-lift flex gap-3 rounded-xl border border-card-border bg-card/50 p-4 text-sm leading-relaxed text-muted sm:p-5 sm:text-base">
+                      <span className="shrink-0 font-mono text-xs text-accent">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <span className="min-w-0 break-words">{item}</span>
+                    </div>
+                  </Reveal>
                 ))}
               </ul>
             </section>
